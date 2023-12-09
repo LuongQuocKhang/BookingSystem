@@ -1,21 +1,21 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BookingSystem.Stay.Api.Controllers.V2;
+namespace BookingSystem.Stay.Api.Controllers.V1;
 
 [ApiController]
-[ApiVersion("2.0")]
+[ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
-public class WeatherForecastController : ControllerBase
+public class StayController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly ILogger<StayController> _logger;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public StayController(ILogger<StayController> logger)
     {
         _logger = logger;
     }
