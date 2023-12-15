@@ -1,5 +1,4 @@
 ﻿using BookingSystem.Stay.Application.Contracts.Persistance;
-using BookingSystem.Stay.Application.ViewModel;
 using AutoMapper;
 using MediatR;
 using BookingSystem.Stay.Application.Features.Commands.CreateStay;
@@ -14,7 +13,7 @@ namespace BookingSystem.Stay.Application.Handlers.Commands.CreateStay
 
         public async Task<int> Handle(CreateStayCommand request, CancellationToken cancellationToken)
         {
-            Stays model = _mapper.Map<Stays>(request);
+            StayEntity model = _mapper.Map<StayEntity>(request);
 
             int stayId = await _stayRepository.CreateStay(model).ConfigureAwait(false);
 

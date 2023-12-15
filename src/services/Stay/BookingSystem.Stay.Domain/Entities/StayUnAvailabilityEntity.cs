@@ -4,8 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BookingSystem.Stay.Domain.Entities;
 
 [Table("StayUnAvailability", Schema = "Stay")]
-public class StayUnAvailability : EntityBase
+public class StayUnAvailabilityEntity : EntityBase
 {
-    public int StaysId { get; set; }
     public DateTime UnAvaiableDate { get; set; }
+    public int StayId { get; set; }
+
+    [ForeignKey("StayId")]
+    public StayEntity Stay { get; set; }
 }

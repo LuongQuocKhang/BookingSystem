@@ -5,33 +5,45 @@ using BookingSystem.Stay.Domain.Entities;
 using BookingSystem.Stay.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.Extensions.Logging;
 
 namespace BookingSystem.Stay.Infrastructure.Repositories;
 
-public class StayRepository(StayContext context, IMapper mapper) : IStayRepository
+public class StayRepository(StayContext context, IMapper mapper, ILogger<StayRepository> logger) : IStayRepository
 {
     private readonly StayContext _context = context;
     private readonly IMapper _mapper = mapper;
+    private readonly ILogger<StayRepository> _logger = logger;
 
     public Task<bool> AddStayToTrip(int stayId, int tripId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<int> CreateStay(Stays model)
+    public async Task<int> CreateStay(Domain.Entities.StayEntity model)
     {
-        EntityEntry<Stays> addedStay = await _context.Stays.AddAsync(model)
+        try
+        {
+            EntityEntry<StayEntity> addedStay = await _context.Stays.AddAsync(model)
             .ConfigureAwait(false);
 
-        return addedStay.Entity.Id;
+            await _context.SaveChangesAsync().ConfigureAwait(false);
+
+            return addedStay.Entity.Id;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message, ex);
+            return int.MinValue;
+        }
     }
 
     public async Task DeleteStay(int id)
     {
-        Stays? stay = await _context.Stays.FirstOrDefaultAsync(x => x.Id == id)
+        StayEntity? stay = await _context.Stays.FirstOrDefaultAsync(x => x.Id == id)
             .ConfigureAwait(false);
 
-        if(stay != null)
+        if (stay != null)
         {
             stay.IsDeleted = true;
 
@@ -41,7 +53,7 @@ public class StayRepository(StayContext context, IMapper mapper) : IStayReposito
 
     public async Task<IReadOnlyCollection<StayViewModel>> GetStays()
     {
-        List<Stays> dbStays = await _context.Stays.Where(x => !x.IsDeleted)
+        List<StayEntity> dbStays = await _context.Stays.Where(x => !x.IsDeleted)
             .ToListAsync()
             .ConfigureAwait(false);
 
@@ -52,7 +64,7 @@ public class StayRepository(StayContext context, IMapper mapper) : IStayReposito
 
     public async Task<StayDetailsViewModel> GetStaysById(int id)
     {
-        Stays? stays = await _context.Stays.FirstOrDefaultAsync(x => x.Id == id).ConfigureAwait(false);
+        StayEntity? stays = await _context.Stays.FirstOrDefaultAsync(x => x.Id == id).ConfigureAwait(false);
 
         if (stays != null)
         {
@@ -64,17 +76,18 @@ public class StayRepository(StayContext context, IMapper mapper) : IStayReposito
         return new StayDetailsViewModel();
     }
 
-    public async Task<bool> ReviewStay(StayReview model)
+    public async Task<bool> ReviewStay(StayReviewEntity model)
     {
-        EntityEntry<StayReview>? review = await _context.StayReviews.AddAsync(model)
+        EntityEntry<StayReviewEntity>? review = await _context.StayReviews.AddAsync(model)
             .ConfigureAwait(false);
         return review != null;
     }
 
-    public async Task<bool> SaveStayToWishList(StayWishList wishList)
+    public async Task<bool> SaveStayToWishList(StayWishListEntity wishList)
     {
-        EntityEntry<StayWishList>? stay = await _context.StayWishLists.AddAsync(wishList)
+        EntityEntry<StayWishListEntity>? stay = await _context.StayWishLists.AddAsync(wishList)
             .ConfigureAwait(false);
+        await _context.SaveChangesAsync().ConfigureAwait(false);
         return stay != null;
     }
 
@@ -82,9 +95,9 @@ public class StayRepository(StayContext context, IMapper mapper) : IStayReposito
     {
         foreach (int userId in userIds)
         {
-            StayShare model = new()
+            StayShareEntity model = new()
             {
-                StaysId = stayId,
+                StayId = stayId,
                 UserId = userId
             };
 
@@ -95,9 +108,18 @@ public class StayRepository(StayContext context, IMapper mapper) : IStayReposito
         return true;
     }
 
-    public async Task<bool> UpdateStay(Stays model)
+    public async Task<bool> UpdateStay(Domain.Entities.StayEntity model)
     {
-        EntityEntry<Stays> stay = _context.Stays.Update(model);
-        return stay != null;
+        try
+        {
+            EntityEntry<StayEntity> stay = _context.Stays.Update(model);
+            await _context.SaveChangesAsync().ConfigureAwait(false);
+            return stay != null;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message, ex);
+            return false;
+        }
     }
 }

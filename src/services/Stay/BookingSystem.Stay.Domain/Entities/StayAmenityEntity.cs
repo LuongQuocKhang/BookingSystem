@@ -4,8 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BookingSystem.Stay.Domain.Entities;
 
 [Table("StayAmenities", Schema = "Stay")]
-public class StayAmenity : EntityBase
+public class StayAmenityEntity : EntityBase
 {
-    public int StaysId { get; set; }
     public int AmenityId { get; set; }
+    public int StayId { get; set; }
+
+    [ForeignKey("StayId")]
+    public StayEntity Stay { get; set; }
 }

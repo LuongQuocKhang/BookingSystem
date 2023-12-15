@@ -5,9 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BookingSystem.Stay.Domain.Entities;
 
 [Table("StayImages", Schema = "Stay")]
-public class StayImage : EntityBase
+public class StayImageEntity : EntityBase
 {
-    [Base64String]
     public string? Image { get; set; }
-    public int StaysId { get; set; }
+    public int StayId { get; set; }
+
+    [ForeignKey("StayId")]
+    public StayEntity Stay { get; set; }
 }

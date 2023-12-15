@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Stay.Infrastructure.Migrations
 {
     [DbContext(typeof(StayContext))]
-    [Migration("20231215133056_init database")]
+    [Migration("20231215162229_init database")]
     partial class initdatabase
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.Amenity", b =>
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.AmenityEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -59,82 +59,7 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                     b.ToTable("Amenities", "Stay");
                 });
 
-            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.RoomRate", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("LastModifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("LastModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StaysId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StaysId");
-
-                    b.ToTable("RoomRates", "Stay");
-                });
-
-            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayAmenity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AmenityId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("LastModifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("LastModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("StaysId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StaysId");
-
-                    b.ToTable("StayAmenities", "Stay");
-                });
-
-            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayHostEntity", b =>
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.HostEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -171,10 +96,10 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StayHost", "Stay");
+                    b.ToTable("Host", "Stay");
                 });
 
-            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayImage", b =>
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.RoomRateEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -188,71 +113,32 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Image")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LastModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("LastModifiedBy")
+                    b.Property<int>("StayId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("LastModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("StaysId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StaysId");
-
-                    b.ToTable("StayImages", "Stay");
-                });
-
-            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayReview", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Comment")
+                    b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("LastModifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("LastModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StaysId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("StaysId");
+                    b.HasIndex("StayId");
 
-                    b.ToTable("StayReviews", "Stay");
+                    b.ToTable("RoomRates", "Stay");
                 });
 
-            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayShare", b =>
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayAmenityEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -260,75 +146,8 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int>("AmenityId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("LastModifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("LastModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("StaysId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("StayShares", "Stay");
-                });
-
-            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayUnAvailability", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("LastModifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("LastModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("StaysId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UnAvaiableDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StaysId");
-
-                    b.ToTable("StayUnAvailability", "Stay");
-                });
-
-            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayWishList", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
@@ -348,15 +167,14 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                     b.Property<int>("StayId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.ToTable("StayWishLists", "Stay");
+                    b.HasIndex("StayId");
+
+                    b.ToTable("StayAmenities", "Stay");
                 });
 
-            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.Stays", b =>
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -365,9 +183,6 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AvatarImage")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CancellationPolicy")
@@ -434,57 +249,254 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
 
                     b.HasIndex("HostId");
 
-                    b.ToTable("Stays", "Stay");
+                    b.ToTable("Stay", "Stay");
                 });
 
-            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.RoomRate", b =>
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayImageEntity", b =>
                 {
-                    b.HasOne("BookingSystem.Stay.Domain.Entities.Stays", null)
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LastModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("StayId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StayId");
+
+                    b.ToTable("StayImages", "Stay");
+                });
+
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayReviewEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LastModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StayId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StayId");
+
+                    b.ToTable("StayReviews", "Stay");
+                });
+
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayShareEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LastModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("StayId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StayId");
+
+                    b.ToTable("StayShares", "Stay");
+                });
+
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayTagEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Label")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LastModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("StayId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StayId");
+
+                    b.ToTable("StayTags", "Stay");
+                });
+
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayUnAvailabilityEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LastModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("StayId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UnAvaiableDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StayId");
+
+                    b.ToTable("StayUnAvailability", "Stay");
+                });
+
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayWishListEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LastModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("StayId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StayWishLists", "Stay");
+                });
+
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.RoomRateEntity", b =>
+                {
+                    b.HasOne("BookingSystem.Stay.Domain.Entities.StayEntity", "Stay")
                         .WithMany("RoomRates")
-                        .HasForeignKey("StaysId")
+                        .HasForeignKey("StayId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Stay");
                 });
 
-            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayAmenity", b =>
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayAmenityEntity", b =>
                 {
-                    b.HasOne("BookingSystem.Stay.Domain.Entities.Stays", null)
+                    b.HasOne("BookingSystem.Stay.Domain.Entities.StayEntity", "Stay")
                         .WithMany("Amenities")
-                        .HasForeignKey("StaysId")
+                        .HasForeignKey("StayId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Stay");
                 });
 
-            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayImage", b =>
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayEntity", b =>
                 {
-                    b.HasOne("BookingSystem.Stay.Domain.Entities.Stays", null)
-                        .WithMany("StayImages")
-                        .HasForeignKey("StaysId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayReview", b =>
-                {
-                    b.HasOne("BookingSystem.Stay.Domain.Entities.Stays", null)
-                        .WithMany("StayReviews")
-                        .HasForeignKey("StaysId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayUnAvailability", b =>
-                {
-                    b.HasOne("BookingSystem.Stay.Domain.Entities.Stays", null)
-                        .WithMany("StayUnAvailability")
-                        .HasForeignKey("StaysId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.Stays", b =>
-                {
-                    b.HasOne("BookingSystem.Stay.Domain.Entities.StayHostEntity", "Host")
+                    b.HasOne("BookingSystem.Stay.Domain.Entities.HostEntity", "Host")
                         .WithMany()
                         .HasForeignKey("HostId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -493,7 +505,62 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                     b.Navigation("Host");
                 });
 
-            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.Stays", b =>
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayImageEntity", b =>
+                {
+                    b.HasOne("BookingSystem.Stay.Domain.Entities.StayEntity", "Stay")
+                        .WithMany("StayImages")
+                        .HasForeignKey("StayId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Stay");
+                });
+
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayReviewEntity", b =>
+                {
+                    b.HasOne("BookingSystem.Stay.Domain.Entities.StayEntity", "Stay")
+                        .WithMany("StayReviews")
+                        .HasForeignKey("StayId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Stay");
+                });
+
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayShareEntity", b =>
+                {
+                    b.HasOne("BookingSystem.Stay.Domain.Entities.StayEntity", "Stay")
+                        .WithMany()
+                        .HasForeignKey("StayId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Stay");
+                });
+
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayTagEntity", b =>
+                {
+                    b.HasOne("BookingSystem.Stay.Domain.Entities.StayEntity", "Stay")
+                        .WithMany("StayTags")
+                        .HasForeignKey("StayId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Stay");
+                });
+
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayUnAvailabilityEntity", b =>
+                {
+                    b.HasOne("BookingSystem.Stay.Domain.Entities.StayEntity", "Stay")
+                        .WithMany("StayUnAvailability")
+                        .HasForeignKey("StayId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Stay");
+                });
+
+            modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayEntity", b =>
                 {
                     b.Navigation("Amenities");
 
@@ -502,6 +569,8 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                     b.Navigation("StayImages");
 
                     b.Navigation("StayReviews");
+
+                    b.Navigation("StayTags");
 
                     b.Navigation("StayUnAvailability");
                 });

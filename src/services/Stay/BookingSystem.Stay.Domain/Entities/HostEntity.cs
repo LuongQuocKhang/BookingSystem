@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookingSystem.Stay.Domain.Entities;
 
-[Table("StayHost", Schema = "Stay")]
-public class StayHostEntity : EntityBase
+[Table("Host", Schema = "Stay")]
+public class HostEntity : EntityBase
 {
     public string? Name { get; set; } = string.Empty;
     public int TotalPlace { get; set; }

@@ -12,7 +12,7 @@ public class UpdateStayCommandHandler(IStayRepository stayRepository, IMapper ma
 
     public async Task<bool> Handle(UpdateStayCommand request, CancellationToken cancellationToken)
     {
-        Stays model = _mapper.Map<Stays>(request);
+        StayEntity model = _mapper.Map<StayEntity>(request);
         await _stayRepository.UpdateStay(model).ConfigureAwait(false);
         return true;
     }

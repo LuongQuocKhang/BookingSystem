@@ -1,4 +1,5 @@
-﻿using BookingSystem.Stay.Application.ViewModel;
+﻿using BookingSystem.Stay.Application.Dto;
+using BookingSystem.Stay.Domain.Entities;
 using MediatR;
 
 namespace BookingSystem.Stay.Application.Features.Commands.CreateStay;
@@ -6,7 +7,6 @@ namespace BookingSystem.Stay.Application.Features.Commands.CreateStay;
 
 public class CreateStayCommand : IRequest<int>
 {
-    public int Id { get; set; }
 
     public string? Name { get; set; } = string.Empty;
 
@@ -14,13 +14,9 @@ public class CreateStayCommand : IRequest<int>
 
     public int NumberOfGuests { get; set; }
 
-    public int NumberOfBaths { get; set; }
+    public int NumberOfBathrooms { get; set; }
 
-    public int NumberOfBeedrooms { get; set; }
-
-    public string HostedBy { get; set; } = "";
-
-    public string? HostedDate { get; set; }
+    public int NumberOfBedrooms { get; set; }
 
     public string? Address { get; set; }
 
@@ -42,13 +38,13 @@ public class CreateStayCommand : IRequest<int>
 
     public string? SpecialNotes { get; set; }
 
-    public string? AvatarImage { get; set; }
+    public List<StayAmenityDto>? Amenities { get; set; }
 
-    public List<StayAmenityViewModel> Amenities { get; set; }
+    public List<RoomRateDto>? RoomRates { get; set; }
 
-    public List<RoomRateViewModel> RoomRates { get; set; }
+    public List<StayUnAvailabilityDto>? StayUnAvailability { get; set; }
 
-    public List<StayAvailabilityViewModel> StayAvailability { get; set; }
+    public List<StayImageDto>? StayImages { get; set; }
 
-    public List<StayImageViewModel> StayImages { get; set; }
+    public List<StayTagDto>? StayTags { get; set; }
 }

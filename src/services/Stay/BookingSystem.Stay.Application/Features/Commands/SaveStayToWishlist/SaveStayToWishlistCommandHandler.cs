@@ -13,7 +13,7 @@ public class SaveStayToWishlistCommandHandler : IRequestHandler<SaveStayToWishli
     }
     public async Task<bool> Handle(SaveStayToWishlistCommand request, CancellationToken cancellationToken)
     {
-        StayWishList wishList = new()
+        StayWishListEntity wishList = new()
         {
             StayId = request.StayId,
             UserId = request.WishlistId

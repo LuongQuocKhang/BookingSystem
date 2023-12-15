@@ -6,15 +6,17 @@ namespace BookingSystem.Stay.Infrastructure.Persistance;
 
 public class StayContext(DbContextOptions<StayContext> options) : DbContext(options)
 {
-    public DbSet<Stays> Stays { get; set; }
+    public DbSet<Domain.Entities.StayEntity> Stays { get; set; }
 
-    public DbSet<StayReview> StayReviews { get; set; }
+    public DbSet<StayReviewEntity> StayReviews { get; set; }
 
-    public DbSet<StayWishList> StayWishLists { get; set; }
+    public DbSet<StayWishListEntity> StayWishLists { get; set; }
 
-    public DbSet<StayShare> StayShares { get; set; }
+    public DbSet<StayShareEntity> StayShares { get; set; }
 
-    public DbSet<Amenity> Amenities { get; set; }
+    public DbSet<AmenityEntity> Amenities { get; set; }
+
+    public DbSet<StayTagEntity> StayTags { get; set; }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {

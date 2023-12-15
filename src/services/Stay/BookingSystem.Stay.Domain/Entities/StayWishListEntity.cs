@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BookingSystem.Stay.Domain.Entities
 {
     [Table("StayWishLists", Schema = "Stay")]
-    public class StayWishList : EntityBase
+    public class StayWishListEntity : EntityBase
     {
-        public int StayId { get; set; }
         public int UserId { get; set; }
+        public int StayId { get; set; }
     }
 }

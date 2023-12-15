@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BookingSystem.Stay.Domain.Entities;
 
 [Table("Amenities", Schema = "Stay")]
-public class Amenity : EntityBase
+public class AmenityEntity : EntityBase
 {
     public string? Name { get; set; }
 

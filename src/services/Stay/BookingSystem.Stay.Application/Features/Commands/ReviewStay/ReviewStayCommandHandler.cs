@@ -1,5 +1,5 @@
 ﻿using BookingSystem.Stay.Application.Contracts.Persistance;
-using BookingSystem.Stay.Application.ViewModel;
+using BookingSystem.Stay.Application.Dto;
 using AutoMapper;
 using MediatR;
 using BookingSystem.Stay.Domain.Entities;
@@ -17,7 +17,7 @@ public class ReviewStayCommandHandler : IRequestHandler<ReviewStayCommand, bool>
     }
     public async Task<bool> Handle(ReviewStayCommand request, CancellationToken cancellationToken)
     {
-        StayReview model = _mapper.Map<StayReview>(request);
+        StayReviewEntity model = _mapper.Map<StayReviewEntity>(request);
         await _stayRepository.ReviewStay(model).ConfigureAwait(false);
 
         return true;

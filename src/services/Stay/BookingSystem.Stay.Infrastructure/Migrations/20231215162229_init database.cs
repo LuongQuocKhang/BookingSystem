@@ -35,7 +35,7 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StayHost",
+                name: "Host",
                 schema: "Stay",
                 columns: table => new
                 {
@@ -53,27 +53,7 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StayHost", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StayShares",
-                schema: "Stay",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StaysId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<int>(type: "int", nullable: false),
-                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StayShares", x => x.Id);
+                    table.PrimaryKey("PK_Host", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -83,8 +63,8 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StayId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
+                    StayId = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedBy = table.Column<int>(type: "int", nullable: false),
@@ -97,7 +77,7 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Stays",
+                name: "Stay",
                 schema: "Stay",
                 columns: table => new
                 {
@@ -119,7 +99,6 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                     CheckInTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CheckOutTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SpecialNotes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AvatarImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedBy = table.Column<int>(type: "int", nullable: false),
@@ -128,12 +107,12 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Stays", x => x.Id);
+                    table.PrimaryKey("PK_Stay", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Stays_StayHost_HostId",
+                        name: "FK_Stay_Host_HostId",
                         column: x => x.HostId,
                         principalSchema: "Stay",
-                        principalTable: "StayHost",
+                        principalTable: "Host",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -147,7 +126,7 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StaysId = table.Column<int>(type: "int", nullable: false),
+                    StayId = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedBy = table.Column<int>(type: "int", nullable: false),
@@ -158,10 +137,10 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_RoomRates", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RoomRates_Stays_StaysId",
-                        column: x => x.StaysId,
+                        name: "FK_RoomRates_Stay_StayId",
+                        column: x => x.StayId,
                         principalSchema: "Stay",
-                        principalTable: "Stays",
+                        principalTable: "Stay",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -173,8 +152,8 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StaysId = table.Column<int>(type: "int", nullable: false),
                     AmenityId = table.Column<int>(type: "int", nullable: false),
+                    StayId = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedBy = table.Column<int>(type: "int", nullable: false),
@@ -185,10 +164,10 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_StayAmenities", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_StayAmenities_Stays_StaysId",
-                        column: x => x.StaysId,
+                        name: "FK_StayAmenities_Stay_StayId",
+                        column: x => x.StayId,
                         principalSchema: "Stay",
-                        principalTable: "Stays",
+                        principalTable: "Stay",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -201,7 +180,7 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StaysId = table.Column<int>(type: "int", nullable: false),
+                    StayId = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedBy = table.Column<int>(type: "int", nullable: false),
@@ -212,10 +191,10 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_StayImages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_StayImages_Stays_StaysId",
-                        column: x => x.StaysId,
+                        name: "FK_StayImages_Stay_StayId",
+                        column: x => x.StayId,
                         principalSchema: "Stay",
-                        principalTable: "Stays",
+                        principalTable: "Stay",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -229,8 +208,8 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Rating = table.Column<int>(type: "int", nullable: false),
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StaysId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
+                    StayId = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedBy = table.Column<int>(type: "int", nullable: false),
@@ -241,10 +220,64 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_StayReviews", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_StayReviews_Stays_StaysId",
-                        column: x => x.StaysId,
+                        name: "FK_StayReviews_Stay_StayId",
+                        column: x => x.StayId,
                         principalSchema: "Stay",
-                        principalTable: "Stays",
+                        principalTable: "Stay",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StayShares",
+                schema: "Stay",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    StayId = table.Column<int>(type: "int", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<int>(type: "int", nullable: false),
+                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StayShares", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StayShares_Stay_StayId",
+                        column: x => x.StayId,
+                        principalSchema: "Stay",
+                        principalTable: "Stay",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StayTags",
+                schema: "Stay",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StayId = table.Column<int>(type: "int", nullable: false),
+                    Label = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<int>(type: "int", nullable: false),
+                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StayTags", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StayTags_Stay_StayId",
+                        column: x => x.StayId,
+                        principalSchema: "Stay",
+                        principalTable: "Stay",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -256,8 +289,8 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StaysId = table.Column<int>(type: "int", nullable: false),
                     UnAvaiableDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StayId = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedBy = table.Column<int>(type: "int", nullable: false),
@@ -268,49 +301,61 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_StayUnAvailability", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_StayUnAvailability_Stays_StaysId",
-                        column: x => x.StaysId,
+                        name: "FK_StayUnAvailability_Stay_StayId",
+                        column: x => x.StayId,
                         principalSchema: "Stay",
-                        principalTable: "Stays",
+                        principalTable: "Stay",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoomRates_StaysId",
+                name: "IX_RoomRates_StayId",
                 schema: "Stay",
                 table: "RoomRates",
-                column: "StaysId");
+                column: "StayId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StayAmenities_StaysId",
+                name: "IX_Stay_HostId",
                 schema: "Stay",
-                table: "StayAmenities",
-                column: "StaysId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StayImages_StaysId",
-                schema: "Stay",
-                table: "StayImages",
-                column: "StaysId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StayReviews_StaysId",
-                schema: "Stay",
-                table: "StayReviews",
-                column: "StaysId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Stays_HostId",
-                schema: "Stay",
-                table: "Stays",
+                table: "Stay",
                 column: "HostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StayUnAvailability_StaysId",
+                name: "IX_StayAmenities_StayId",
+                schema: "Stay",
+                table: "StayAmenities",
+                column: "StayId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StayImages_StayId",
+                schema: "Stay",
+                table: "StayImages",
+                column: "StayId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StayReviews_StayId",
+                schema: "Stay",
+                table: "StayReviews",
+                column: "StayId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StayShares_StayId",
+                schema: "Stay",
+                table: "StayShares",
+                column: "StayId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StayTags_StayId",
+                schema: "Stay",
+                table: "StayTags",
+                column: "StayId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StayUnAvailability_StayId",
                 schema: "Stay",
                 table: "StayUnAvailability",
-                column: "StaysId");
+                column: "StayId");
         }
 
         /// <inheritdoc />
@@ -341,6 +386,10 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                 schema: "Stay");
 
             migrationBuilder.DropTable(
+                name: "StayTags",
+                schema: "Stay");
+
+            migrationBuilder.DropTable(
                 name: "StayUnAvailability",
                 schema: "Stay");
 
@@ -349,11 +398,11 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                 schema: "Stay");
 
             migrationBuilder.DropTable(
-                name: "Stays",
+                name: "Stay",
                 schema: "Stay");
 
             migrationBuilder.DropTable(
-                name: "StayHost",
+                name: "Host",
                 schema: "Stay");
         }
     }

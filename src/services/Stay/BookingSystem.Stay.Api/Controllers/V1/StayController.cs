@@ -9,7 +9,7 @@ using BookingSystem.Stay.Application.Features.Commands.CreateStay;
 using BookingSystem.Stay.Application.Handlers.Commands.AddStayToTrip;
 using BookingSystem.Stay.Application.Handlers.Commands.UpdateStay;
 using BookingSystem.Stay.Application.Handlers.Queries.GetStays;
-using BookingSystem.Stay.Application.ViewModel;
+using BookingSystem.Stay.Application.Dto;
 #endregion
 
 using Asp.Versioning;
@@ -17,6 +17,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
+using BookingSystem.Stay.Application.ViewModel;
 
 namespace BookingSystem.Stay.Api.Controllers.V1;
 
@@ -24,15 +25,10 @@ namespace BookingSystem.Stay.Api.Controllers.V1;
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [Authorize]
-public class StaysController : ControllerBase
+public class StaysController(ILogger<StaysController> logger, IMediator mediator) : ControllerBase
 {
-    private readonly IMediator _mediator;
-    private readonly ILogger<StaysController> _logger;
-    public StaysController(ILogger<StaysController> logger, IMediator mediator)
-    {
-        _logger = logger;
-        _mediator = mediator;
-    }
+    private readonly IMediator _mediator = mediator;
+    private readonly ILogger<StaysController> _logger = logger;
 
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<StayViewModel>), (int)HttpStatusCode.OK)]
@@ -43,8 +39,8 @@ public class StaysController : ControllerBase
     }
 
     [HttpGet("{stayId}")]
-    [ProducesResponseType(typeof(StayViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<StayViewModel>> GetStayDetails(int stayId)
+    [ProducesResponseType(typeof(StayDetailsViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<StayDetailsViewModel>> GetStayDetails(int stayId)
     {
         StayDetailsViewModel result = await _mediator.Send(new GetStayDetailsQuery()
         {
@@ -56,7 +52,7 @@ public class StaysController : ControllerBase
     [HttpPost]
     [Route("{stayId}/review-stay")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
-    public async Task<ActionResult<bool>> ReviewStay(int stayId, ReviewStayViewModel model)
+    public async Task<ActionResult<bool>> ReviewStay(int stayId, ReviewStayDto model)
     {
         ReviewStayCommand command = new ReviewStayCommand()
         {
