@@ -1,5 +1,7 @@
 ﻿using BookingSystem.Stay.Application.Contracts.Persistance;
+using BookingSystem.Stay.Infrastructure.Persistance;
 using BookingSystem.Stay.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,10 +11,8 @@ public static class InfrastructureServiceRegistration
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        //services.AddDbContext<StayContext>(options =>
-        //    options.UseSqlServer(configuration.GetConnectionString("StayConnectionString")));
-
-        //services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
+        services.AddDbContext<StayContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("OrderingConnectionString")));
 
         services.AddScoped<IStayRepository, StayRepository>();
 

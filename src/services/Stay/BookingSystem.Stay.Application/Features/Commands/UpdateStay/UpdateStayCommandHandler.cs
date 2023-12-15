@@ -18,7 +18,7 @@ public class UpdateStayCommandHandler : IRequestHandler<UpdateStayCommand, bool>
     public async Task<bool> Handle(UpdateStayCommand request, CancellationToken cancellationToken)
     {
         StayDetailsViewModel model = _mapper.Map<StayDetailsViewModel>(request);
-        await _stayRepository.UpdateStayAsync(model).ConfigureAwait(false);
+        await _stayRepository.UpdateStay(model).ConfigureAwait(false);
         return true;
     }
 }

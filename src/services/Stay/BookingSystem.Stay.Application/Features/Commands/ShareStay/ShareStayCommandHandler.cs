@@ -17,7 +17,7 @@ public class ShareStayCommandHandler : IRequestHandler<ShareStayCommand, bool>
     public async Task<bool> Handle(ShareStayCommand request, CancellationToken cancellationToken)
     {
         ShareStayViewModel model = _mapper.Map<ShareStayViewModel>(request);
-        await _stayRepository.ShareStayAsync(request.StayId, model).ConfigureAwait(false);
+        await _stayRepository.ShareStay(request.StayId, model).ConfigureAwait(false);
 
         return true;
     }

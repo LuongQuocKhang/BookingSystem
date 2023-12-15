@@ -12,7 +12,7 @@ public class AddStayToTripCommandHandler : IRequestHandler<AddStayToTripCommand,
     }
     public async Task<bool> Handle(AddStayToTripCommand request, CancellationToken cancellationToken)
     {
-        await _stayRepository.AddStayToTripAsync(request.StayId, request.TripId).ConfigureAwait(false);
+        await _stayRepository.AddStayToTrip(request.StayId, request.TripId).ConfigureAwait(false);
 
         return true;
     }

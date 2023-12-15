@@ -1,3 +1,4 @@
+#region Using Commands, queries
 using BookingSystem.Stay.Application.Handlers.Commands.DeleteStay;
 using BookingSystem.Stay.Application.Handlers.Commands.ReviewStay;
 using BookingSystem.Stay.Application.Handlers.Commands.SaveStayToWishlist;
@@ -9,6 +10,7 @@ using BookingSystem.Stay.Application.Handlers.Commands.AddStayToTrip;
 using BookingSystem.Stay.Application.Handlers.Commands.UpdateStay;
 using BookingSystem.Stay.Application.Handlers.Queries.GetStays;
 using BookingSystem.Stay.Application.ViewModel;
+#endregion
 
 using Asp.Versioning;
 using MediatR;

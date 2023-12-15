@@ -1,24 +1,25 @@
 ﻿using BookingSystem.Stay.Application.ViewModel;
+using BookingSystem.Stay.Domain.Entities;
 
 namespace BookingSystem.Stay.Application.Contracts.Persistance;
 
 public interface IStayRepository
 {
-    Task<IEnumerable<StayViewModel>> GetStaysAsync();
+    Task<int> CreateStay(Stays model);
 
-    Task<StayDetailsViewModel> GetStaysByIdAsync(int id);
+    Task<bool> AddStayToTrip(int stayId, int tripId);
 
-    Task ReviewStayAsync(int stayId, ReviewStayViewModel model, int userId);
+    Task DeleteStay(int id);
 
-    Task ShareStayAsync(int stayId, ShareStayViewModel model);
+    Task<IReadOnlyCollection<StayViewModel>> GetStays();
 
-    Task SaveStayToWishListAsync(int stayId, int wishlistId);
+    Task<StayDetailsViewModel> GetStaysById(int id);
 
-    Task AddStayToTripAsync(int stayId, int tripId);
+    Task<bool> ReviewStay(StayReview model);
 
-    Task<int> CreateStayAsync(CreateStayViewModel model);
+    Task<bool> SaveStayToWishList(StayWishList wishList);
 
-    Task UpdateStayAsync(StayDetailsViewModel model);
+    Task<bool> ShareStay(int stayId, IEnumerable<int> userIds);
 
-    Task DeleteStayAsync(int id);
+    Task<bool> UpdateStay(Stays model);
 }

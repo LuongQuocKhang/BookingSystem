@@ -12,7 +12,7 @@ public class SaveStayToWishlistCommandHandler : IRequestHandler<SaveStayToWishli
     }
     public async Task<bool> Handle(SaveStayToWishlistCommand request, CancellationToken cancellationToken)
     {
-        await _stayRepository.SaveStayToWishListAsync(request.StayId, request.WishlistId).ConfigureAwait(false);
+        await _stayRepository.SaveStayToWishList(request.StayId, request.WishlistId).ConfigureAwait(false);
 
         return true;
     }

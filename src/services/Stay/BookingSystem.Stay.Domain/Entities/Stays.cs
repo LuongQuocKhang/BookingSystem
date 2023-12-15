@@ -6,7 +6,7 @@ namespace BookingSystem.Stay.Domain.Entities
     [Table("Stays", Schema = "Stay")]
     public class Stays : EntityBase
     {
-        public string Name { get; set; }
+        public string? Name { get; set; } = string.Empty;
         public int NumberOfBeds { get; set; }
         public int NumberOfGuests { get; set; }
         public int NumberOfBaths { get; set; }
@@ -24,11 +24,11 @@ namespace BookingSystem.Stay.Domain.Entities
         public string? SpecialNotes { get; set; }
         public string? AvatarImage { get; set; }
 
-        public virtual ICollection<Amenity> Amenities { get; set; }
-        public virtual ICollection<RoomRate> RoomRates { get; set; }
-        public virtual ICollection<StayAvailability> StayAvailability { get;set; }
-        public virtual ICollection<StayReview> StayReviews { get;set; }
-        public virtual ICollection<StayImage> StayImages { get;set; }
+        public virtual ICollection<StayAmenity>? Amenities { get; set; }
+        public virtual ICollection<RoomRate>? RoomRates { get; set; }
+        public virtual ICollection<StayAvailability>? StayAvailability { get;set; }
+        public virtual ICollection<StayReview>? StayReviews { get;set; }
+        public virtual ICollection<StayImage>? StayImages { get;set; }
 
         [ForeignKey("HostId")]
         public StayHostEntity HostInformation { get; set; }

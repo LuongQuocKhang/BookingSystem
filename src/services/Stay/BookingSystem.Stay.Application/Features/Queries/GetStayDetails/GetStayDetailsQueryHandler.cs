@@ -15,7 +15,7 @@ public class GetStayDetailsQueryHandler : IRequestHandler<GetStayDetailsQuery, S
 
     public async Task<StayDetailsViewModel> Handle(GetStayDetailsQuery request, CancellationToken cancellationToken)
     {
-        StayDetailsViewModel stay = await _stayRepository.GetStaysByIdAsync(request.StayId).ConfigureAwait(false);
+        StayDetailsViewModel stay = await _stayRepository.GetStaysById(request.StayId).ConfigureAwait(false);
 
         return stay;
     }

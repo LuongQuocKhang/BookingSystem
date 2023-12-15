@@ -14,7 +14,7 @@ namespace BookingSystem.Stay.Application.Handlers.Commands.DeleteStay
 
         public async Task<bool> Handle(DeleteStayCommand request, CancellationToken cancellationToken)
         {
-            await _stayRepository.DeleteStayAsync(request.StayId).ConfigureAwait(false);
+            await _stayRepository.DeleteStay(request.StayId).ConfigureAwait(false);
 
             return true;
         }

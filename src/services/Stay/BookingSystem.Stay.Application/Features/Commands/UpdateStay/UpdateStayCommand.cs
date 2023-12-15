@@ -24,7 +24,7 @@ public class UpdateStayCommand : IRequest<bool>
     public string? CheckOutTime { get; set; }
     public string? SpecialNotes { get; set; }
     public string? AvatarImage { get; set; }
-    public List<Amenity> Amenities { get; set; }
+    public List<StayAmenity> Amenities { get; set; }
     public List<RoomRate> RoomRates { get; set; }
     public List<StayAvailability> StayAvailability { get; set; }
     public List<StayImage> StayImages { get; set; }

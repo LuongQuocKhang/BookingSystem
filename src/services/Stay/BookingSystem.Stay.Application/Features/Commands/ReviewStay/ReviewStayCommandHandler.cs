@@ -2,6 +2,7 @@
 using BookingSystem.Stay.Application.ViewModel;
 using AutoMapper;
 using MediatR;
+using BookingSystem.Stay.Domain.Entities;
 
 namespace BookingSystem.Stay.Application.Handlers.Commands.ReviewStay;
 
@@ -16,8 +17,8 @@ public class ReviewStayCommandHandler : IRequestHandler<ReviewStayCommand, bool>
     }
     public async Task<bool> Handle(ReviewStayCommand request, CancellationToken cancellationToken)
     {
-        ReviewStayViewModel model = _mapper.Map<ReviewStayViewModel>(request);
-        await _stayRepository.ReviewStayAsync(request.StayId, model, request.UserId).ConfigureAwait(false);
+        StayReview model = _mapper.Map<StayReview>(request);
+        await _stayRepository.ReviewStay(request.StayId, model, request.UserId).ConfigureAwait(false);
 
         return true;
     }
