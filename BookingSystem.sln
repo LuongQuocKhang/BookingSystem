@@ -89,35 +89,35 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Booking.Proce
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Experiences", "Experiences", "{6980BCF1-7B19-4099-80A3-63D0F4F2DBD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Experiences.Api", "src\Services\Experiences\BookingSystem.Experiences.Api\BookingSystem.Experiences.Api.csproj", "{222DDE45-7044-4CDE-ABB3-EC9355A356C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Experiences.Api", "src\Services\Experiences\BookingSystem.Experiences.Api\BookingSystem.Experiences.Api.csproj", "{222DDE45-7044-4CDE-ABB3-EC9355A356C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Experiences.Domain", "src\Services\Experiences\BookingSystem.Experiences.Domain\BookingSystem.Experiences.Domain.csproj", "{A9BE2519-0CA2-49E3-ABC7-640F5B48B2BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Experiences.Domain", "src\Services\Experiences\BookingSystem.Experiences.Domain\BookingSystem.Experiences.Domain.csproj", "{A9BE2519-0CA2-49E3-ABC7-640F5B48B2BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Experiences.Application", "src\Services\Experiences\BookingSystem.Experiences.Application\BookingSystem.Experiences.Application.csproj", "{EC9F0F2D-562A-4B85-A13A-58469B41F302}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Experiences.Application", "src\Services\Experiences\BookingSystem.Experiences.Application\BookingSystem.Experiences.Application.csproj", "{EC9F0F2D-562A-4B85-A13A-58469B41F302}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Experiences.Infrastructure", "src\Services\Experiences\BookingSystem.Experiences.Infrastructure\BookingSystem.Experiences.Infrastructure.csproj", "{9C51ED72-F52D-4723-9310-BAD0064C179E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Experiences.Infrastructure", "src\Services\Experiences\BookingSystem.Experiences.Infrastructure\BookingSystem.Experiences.Infrastructure.csproj", "{9C51ED72-F52D-4723-9310-BAD0064C179E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cars", "Cars", "{168510E7-289B-47F0-8A62-F8E7DEE9871D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Cars.Api", "src\Services\Cars\BookingSystem.Cars.Api\BookingSystem.Cars.Api.csproj", "{A4CF84A7-E859-46C8-A29F-E07B7990D391}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Cars.Api", "src\Services\Cars\BookingSystem.Cars.Api\BookingSystem.Cars.Api.csproj", "{A4CF84A7-E859-46C8-A29F-E07B7990D391}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Cars.Application", "src\Services\Cars\BookingSystem.Cars.Application\BookingSystem.Cars.Application.csproj", "{D900A8A4-4F43-45C8-BD4A-95BB935AEFF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Cars.Application", "src\Services\Cars\BookingSystem.Cars.Application\BookingSystem.Cars.Application.csproj", "{D900A8A4-4F43-45C8-BD4A-95BB935AEFF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Cars.Domain", "src\Services\Cars\BookingSystem.Cars.Domain\BookingSystem.Cars.Domain.csproj", "{4E18AF66-F790-4D31-9C52-C89BA869533B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Cars.Domain", "src\Services\Cars\BookingSystem.Cars.Domain\BookingSystem.Cars.Domain.csproj", "{4E18AF66-F790-4D31-9C52-C89BA869533B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Cars.Infrastructure", "src\Services\Cars\BookingSystem.Cars.Infrastructure\BookingSystem.Cars.Infrastructure.csproj", "{C7F78334-4255-4FB0-8824-FA692D32E70E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Cars.Infrastructure", "src\Services\Cars\BookingSystem.Cars.Infrastructure\BookingSystem.Cars.Infrastructure.csproj", "{C7F78334-4255-4FB0-8824-FA692D32E70E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Trips", "Trips", "{29BD7A45-7F4E-4050-A738-FD2A79A48AC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Trips.Api", "src\Services\Trips\BookingSystem.Trips.Api\BookingSystem.Trips.Api.csproj", "{6D313AFC-8DD7-4189-8318-17DE41B8D899}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Trips.Api", "src\Services\Trips\BookingSystem.Trips.Api\BookingSystem.Trips.Api.csproj", "{6D313AFC-8DD7-4189-8318-17DE41B8D899}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Trips.Application", "src\Services\Trips\BookingSystem.Trips.Application\BookingSystem.Trips.Application.csproj", "{1BA729C2-0834-4678-B91C-04A6D183D3D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Trips.Application", "src\Services\Trips\BookingSystem.Trips.Application\BookingSystem.Trips.Application.csproj", "{1BA729C2-0834-4678-B91C-04A6D183D3D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Trips.Domain", "src\Services\Trips\BookingSystem.Trips.Domain\BookingSystem.Trips.Domain.csproj", "{89D98EE2-7CDE-464C-ABEC-5DB1D1610C57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Trips.Domain", "src\Services\Trips\BookingSystem.Trips.Domain\BookingSystem.Trips.Domain.csproj", "{89D98EE2-7CDE-464C-ABEC-5DB1D1610C57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Trips.Infrastructure", "src\Services\Trips\BookingSystem.Trips.Infrastructure\BookingSystem.Trips.Infrastructure.csproj", "{18414B57-5126-403A-B6B3-E01C35959CD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Trips.Infrastructure", "src\Services\Trips\BookingSystem.Trips.Infrastructure\BookingSystem.Trips.Infrastructure.csproj", "{18414B57-5126-403A-B6B3-E01C35959CD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.ApiGateways", "src\ApiGateways\BookingSystem.ApiGateways\BookingSystem.ApiGateways.csproj", "{71D5A32E-DABA-422A-9B46-9BCDEA5D91B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.ApiGateways", "src\ApiGateways\BookingSystem.ApiGateways\BookingSystem.ApiGateways.csproj", "{71D5A32E-DABA-422A-9B46-9BCDEA5D91B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

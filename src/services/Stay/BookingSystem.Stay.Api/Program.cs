@@ -1,4 +1,7 @@
 using BookingSystem.Stay.Api.Extensions;
+using BookingSystem.Stay.Application;
+using BookingSystem.Stay.Infrastructure;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +10,21 @@ builder.Services.AddControllers();
 builder.Services
    .AddAndConfigApiVersioning()
    .AddAndConfigSwagger();
+
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+    {
+        options.Authority = builder.Configuration["ApiEndPoint:IdentityServerURL"];
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateAudience = false
+        };
+    });
+
+builder.Services.AddApplicationServices();
+
+builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
@@ -22,6 +40,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

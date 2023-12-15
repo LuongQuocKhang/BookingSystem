@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BookingSystem.Stay.Application\BookingSystem.Stay.Application.csproj" />
+    <ProjectReference Include="..\BookingSystem.Stay.Domain\BookingSystem.Stay.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,30 +1,14 @@
 ﻿using BookingSystem.Stay.Api.Infrastructure.Swagger;
-using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Globalization;
 using System.Reflection;
 
 namespace BookingSystem.Stay.Api.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddAndConfigLocalization(this IServiceCollection services)
-    {
-        services.AddLocalization(options => options.ResourcesPath = "Resources");
-
-        var supportedCultures = new List<CultureInfo> { new("en"), new("fa") };
-        services.Configure<RequestLocalizationOptions>(options =>
-        {
-            options.DefaultRequestCulture = new RequestCulture("fa");
-            options.SupportedCultures = supportedCultures;
-            options.SupportedUICultures = supportedCultures;
-        });
-
-        return services;
-    }
-
     public static IServiceCollection AddAndConfigApiVersioning(this IServiceCollection services)
     {
         services.Configure<RouteOptions>(options => { options.LowercaseUrls = true; });
@@ -64,28 +48,30 @@ public static class ServiceCollectionExtensions
             options.OperationFilter<SwaggerLanguageHeader>();
 
             // JWT Bearer Authorization
-            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+
+            var jwtSecurityScheme = new OpenApiSecurityScheme
             {
-                Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                Name = "Authorization",
+                BearerFormat = "JWT",
+                Name = "JWT Authentication",
                 In = ParameterLocation.Header,
-                Type = SecuritySchemeType.ApiKey
-            });
-            options.AddSecurityRequirement(new OpenApiSecurityRequirement
-            {
+                Type = SecuritySchemeType.Http,
+                Scheme = JwtBearerDefaults.AuthenticationScheme,
+                Description = "JWT Authorization header using the Bearer scheme.",
+
+                Reference = new OpenApiReference
                 {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        },
-                        Scheme = "oauth2",
-                        Name = "Bearer",
-                        In = ParameterLocation.Header,
-                    },
-                    new List<string>()
+                    Id = JwtBearerDefaults.AuthenticationScheme,
+                    Type = ReferenceType.SecurityScheme
+                }
+            };
+
+            options.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement()
+            {
+                { 
+                    jwtSecurityScheme, 
+                    Array.Empty<string>() 
                 }
             });
 

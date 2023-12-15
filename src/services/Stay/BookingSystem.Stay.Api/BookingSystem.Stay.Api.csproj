@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="7.0.0" />
@@ -16,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookingSystem.Stay.Application\BookingSystem.Stay.Application.csproj" />
+    <ProjectReference Include="..\BookingSystem.Stay.Infrastructure\BookingSystem.Stay.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

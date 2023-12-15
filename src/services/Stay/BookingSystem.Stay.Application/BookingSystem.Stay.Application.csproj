@@ -17,9 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\GetStays\" />
-    <Folder Include="Features\GetStays\Commands\" />
-    <Folder Include="Features\GetStays\Queries\" />
+    <ProjectReference Include="..\BookingSystem.Stay.Domain\BookingSystem.Stay.Domain.csproj" />
   </ItemGroup>
 
 </Project>
