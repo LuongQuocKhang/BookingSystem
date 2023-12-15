@@ -119,11 +119,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Trips.Infrast
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.ApiGateways", "src\ApiGateways\BookingSystem.ApiGateways\BookingSystem.ApiGateways.csproj", "{71D5A32E-DABA-422A-9B46-9BCDEA5D91B9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{54C5DD62-5B48-4022-8A25-32458244A1B5}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\Users\Luong Quoc Khang\Downloads\Booking System.postman_collection.json = ..\..\..\Users\Luong Quoc Khang\Downloads\Booking System.postman_collection.json
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
