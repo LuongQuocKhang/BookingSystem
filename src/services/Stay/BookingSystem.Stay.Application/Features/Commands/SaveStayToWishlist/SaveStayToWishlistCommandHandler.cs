@@ -1,4 +1,5 @@
 ﻿using BookingSystem.Stay.Application.Contracts.Persistance;
+using BookingSystem.Stay.Domain.Entities;
 using MediatR;
 
 namespace BookingSystem.Stay.Application.Handlers.Commands.SaveStayToWishlist;
@@ -12,7 +13,13 @@ public class SaveStayToWishlistCommandHandler : IRequestHandler<SaveStayToWishli
     }
     public async Task<bool> Handle(SaveStayToWishlistCommand request, CancellationToken cancellationToken)
     {
-        await _stayRepository.SaveStayToWishList(request.StayId, request.WishlistId).ConfigureAwait(false);
+        StayWishList wishList = new()
+        {
+            StayId = request.StayId,
+            UserId = request.WishlistId
+        };
+
+        await _stayRepository.SaveStayToWishList(wishList).ConfigureAwait(false);
 
         return true;
     }

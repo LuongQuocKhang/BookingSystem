@@ -1,23 +1,18 @@
 ﻿using BookingSystem.Stay.Application.Contracts.Persistance;
-using BookingSystem.Stay.Application.ViewModel;
 using AutoMapper;
 using MediatR;
+using BookingSystem.Stay.Domain.Entities;
 
 namespace BookingSystem.Stay.Application.Handlers.Commands.UpdateStay;
 
-public class UpdateStayCommandHandler : IRequestHandler<UpdateStayCommand, bool>
+public class UpdateStayCommandHandler(IStayRepository stayRepository, IMapper mapper) : IRequestHandler<UpdateStayCommand, bool>
 {
-    private readonly IStayRepository _stayRepository;
-    private readonly IMapper _mapper;
-    public UpdateStayCommandHandler(IStayRepository stayRepository, IMapper mapper)
-    {
-        _stayRepository = stayRepository;
-        _mapper = mapper;
-    }
+    private readonly IStayRepository _stayRepository = stayRepository;
+    private readonly IMapper _mapper = mapper;
 
     public async Task<bool> Handle(UpdateStayCommand request, CancellationToken cancellationToken)
     {
-        StayDetailsViewModel model = _mapper.Map<StayDetailsViewModel>(request);
+        Stays model = _mapper.Map<Stays>(request);
         await _stayRepository.UpdateStay(model).ConfigureAwait(false);
         return true;
     }

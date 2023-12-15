@@ -71,16 +71,18 @@ public class StayRepository(StayContext context, IMapper mapper) : IStayReposito
         return review != null;
     }
 
-    public Task<bool> SaveStayToWishList(StayWishList wishList)
+    public async Task<bool> SaveStayToWishList(StayWishList wishList)
     {
-        throw new NotImplementedException();
+        EntityEntry<StayWishList>? stay = await _context.StayWishLists.AddAsync(wishList)
+            .ConfigureAwait(false);
+        return stay != null;
     }
 
     public async Task<bool> ShareStay(int stayId, IEnumerable<int> userIds)
     {
         foreach (int userId in userIds)
         {
-            StayShare model = new StayShare()
+            StayShare model = new()
             {
                 StaysId = stayId,
                 UserId = userId
@@ -89,10 +91,13 @@ public class StayRepository(StayContext context, IMapper mapper) : IStayReposito
             _context.StayShares.Add(model);
         }
         await _context.SaveChangesAsync().ConfigureAwait(false);
+
+        return true;
     }
 
-    public Task<bool> UpdateStay(Stays model)
+    public async Task<bool> UpdateStay(Stays model)
     {
-        throw new NotImplementedException();
+        EntityEntry<Stays> stay = _context.Stays.Update(model);
+        return stay != null;
     }
 }

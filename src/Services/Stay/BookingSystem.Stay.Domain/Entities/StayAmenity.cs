@@ -7,4 +7,5 @@ namespace BookingSystem.Stay.Domain.Entities;
 public class StayAmenity : EntityBase
 {
     public int StaysId { get; set; }
+    public int AmenityId { get; set; }
 }

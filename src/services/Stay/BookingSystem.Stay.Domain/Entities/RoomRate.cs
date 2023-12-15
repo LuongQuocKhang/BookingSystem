@@ -6,7 +6,7 @@ namespace BookingSystem.Stay.Domain.Entities;
 [Table("RoomRates", Schema = "Stay")]
 public class RoomRate : EntityBase
 {
-    public string Name { get; set; } // Monday - Thursday, Rent by month
-    public string Value { get; set; } // $199, -8.34 %
+    public string? Name { get; set; } // Monday - Thursday, Rent by month
+    public string? Value { get; set; } // $199, -8.34 %
     public int StaysId { get; set; }
 }

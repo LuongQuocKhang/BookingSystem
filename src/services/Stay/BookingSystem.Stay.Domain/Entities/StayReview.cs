@@ -7,7 +7,7 @@ namespace BookingSystem.Stay.Domain.Entities;
 public class StayReview : EntityBase
 {
     public int Rating { get; set; }
-    public string Comment { get; set; }
+    public string? Comment { get; set; }
     public int StaysId { get; set; }
     public int UserId { get; set; }
 }

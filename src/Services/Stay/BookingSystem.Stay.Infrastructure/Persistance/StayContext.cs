@@ -4,11 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookingSystem.Stay.Infrastructure.Persistance;
 
-public class StayContext : DbContext
+public class StayContext(DbContextOptions<StayContext> options) : DbContext(options)
 {
-    public StayContext(DbContextOptions<StayContext> options) : base(options)
-    { }
-
     public DbSet<Stays> Stays { get; set; }
 
     public DbSet<StayReview> StayReviews { get; set; }
@@ -28,15 +25,15 @@ public class StayContext : DbContext
             {
                 case EntityState.Added:
                     entry.Entity.CreatedDate = DateTime.Now;
-                    entry.Entity.CreatedBy = "admin";
+                    entry.Entity.CreatedBy = 0;
                     break;
                 case EntityState.Modified:
                     entry.Entity.LastModifiedDate = DateTime.Now;
-                    entry.Entity.LastModifiedBy = "admin";
+                    entry.Entity.LastModifiedBy = 0;
                     break;
                 case EntityState.Deleted:
                     entry.Entity.LastModifiedDate = DateTime.Now;
-                    entry.Entity.LastModifiedBy = "admin";
+                    entry.Entity.LastModifiedBy = 0;
                     break;
             }
 

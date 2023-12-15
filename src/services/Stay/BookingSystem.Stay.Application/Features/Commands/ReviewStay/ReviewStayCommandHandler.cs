@@ -18,7 +18,7 @@ public class ReviewStayCommandHandler : IRequestHandler<ReviewStayCommand, bool>
     public async Task<bool> Handle(ReviewStayCommand request, CancellationToken cancellationToken)
     {
         StayReview model = _mapper.Map<StayReview>(request);
-        await _stayRepository.ReviewStay(request.StayId, model, request.UserId).ConfigureAwait(false);
+        await _stayRepository.ReviewStay(model).ConfigureAwait(false);
 
         return true;
     }
