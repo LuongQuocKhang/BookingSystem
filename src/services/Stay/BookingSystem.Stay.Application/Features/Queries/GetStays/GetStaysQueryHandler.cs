@@ -15,6 +15,7 @@ public class GetStaysQueryHandler : IRequestHandler<GetStaysQuery, IEnumerable<S
 
     public async Task<IEnumerable<StayViewModel>> Handle(GetStaysQuery request, CancellationToken cancellationToken)
     {
-        return await _stayRepository.GetStays().ConfigureAwait(false);
+        return await _stayRepository.GetStays()
+            .ConfigureAwait(false);
     }
 }

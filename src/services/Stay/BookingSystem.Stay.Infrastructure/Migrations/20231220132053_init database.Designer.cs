@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Stay.Infrastructure.Migrations
 {
     [DbContext(typeof(StayContext))]
-    [Migration("20231215162229_init database")]
+    [Migration("20231220132053_init database")]
     partial class initdatabase
     {
         /// <inheritdoc />
@@ -168,6 +168,8 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AmenityId");
 
                     b.HasIndex("StayId");
 
@@ -485,11 +487,19 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
 
             modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayAmenityEntity", b =>
                 {
+                    b.HasOne("BookingSystem.Stay.Domain.Entities.AmenityEntity", "Amenity")
+                        .WithMany()
+                        .HasForeignKey("AmenityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("BookingSystem.Stay.Domain.Entities.StayEntity", "Stay")
                         .WithMany("Amenities")
                         .HasForeignKey("StayId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Amenity");
 
                     b.Navigation("Stay");
                 });

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookingSystem.Stay.Application.Contracts.Persistance;
+using BookingSystem.Stay.Application.Dto;
 using BookingSystem.Stay.Application.ViewModel;
 using BookingSystem.Stay.Domain.Entities;
 using BookingSystem.Stay.Infrastructure.Persistance;
@@ -53,7 +54,29 @@ public class StayRepository(StayContext context, IMapper mapper, ILogger<StayRep
 
     public async Task<IReadOnlyCollection<StayViewModel>> GetStays()
     {
-        List<StayEntity> dbStays = await _context.Stays.Where(x => !x.IsDeleted)
+        List<StayViewModel> dbStays = await _context.Stays
+            .AsNoTracking()
+            .Include(x => x.RoomRates)
+            .Include(x => x.Amenities)
+            .Include(x => x.StayImages)
+            .Include(x => x.StayTags)
+            .Where(x => !x.IsDeleted)
+            .Select(x => new StayViewModel()
+            {
+                Id = x.Id,
+                Address = x.Address,
+                Name = x.Name,
+                NumberOfBathrooms = x.NumberOfBathrooms,
+                NumberOfBedrooms = x.NumberOfBedrooms,
+                NumberOfBeds = x.NumberOfBeds,
+                NumberOfGuests = x.NumberOfGuests,
+                PricePerNight = x.PricePerNight,
+                Rating = x.Rating,
+                Amenities = _mapper.Map<List<StayAmenityViewModel>>(x.Amenities),
+                RoomRates = _mapper.Map<List<RoomRateViewModel>>(x.RoomRates),
+                StayImages = _mapper.Map<List<StayImageViewModel>>(x.StayImages),
+                StayTags = _mapper.Map<List<StayTagViewModel>>(x.StayTags)
+            })
             .ToListAsync()
             .ConfigureAwait(false);
 
@@ -62,9 +85,22 @@ public class StayRepository(StayContext context, IMapper mapper, ILogger<StayRep
         return stayViews;
     }
 
-    public async Task<StayDetailsViewModel> GetStaysById(int id)
+    public async Task<StayDetailsViewModel?> GetStaysById(int id)
     {
-        StayEntity? stays = await _context.Stays.FirstOrDefaultAsync(x => x.Id == id).ConfigureAwait(false);
+        StayEntity? stays = await _context.Stays
+            .AsNoTracking()
+            .Include(x => x.StayTags)
+            .Include(x => x.Amenities!)
+                .ThenInclude(x => x.Amenity)
+            .Include(x => x.RoomRates)
+            .Include(x => x.StayUnAvailability)
+            .Include(x => x.StayReviews)
+            .Include(x => x.StayImages)
+            .Include(x => x.StayTags)
+            .Include(x => x.Host)
+            .FirstOrDefaultAsync(x => x.Id == id 
+            && !x.IsDeleted)
+            .ConfigureAwait(false);
 
         if (stays != null)
         {
@@ -73,7 +109,7 @@ public class StayRepository(StayContext context, IMapper mapper, ILogger<StayRep
             return stayDetailsViews;
         }
 
-        return new StayDetailsViewModel();
+        return null;
     }
 
     public async Task<bool> ReviewStay(StayReviewEntity model)
@@ -113,7 +149,14 @@ public class StayRepository(StayContext context, IMapper mapper, ILogger<StayRep
         try
         {
             EntityEntry<StayEntity> stay = _context.Stays.Update(model);
-            await _context.SaveChangesAsync().ConfigureAwait(false);
+
+            stay.State = EntityState.Modified;
+
+            _context.Attach(stay);
+
+            await _context.SaveChangesAsync()
+                .ConfigureAwait(false);
+
             return stay != null;
         }
         catch (Exception ex)

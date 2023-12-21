@@ -7,7 +7,6 @@ namespace BookingSystem.Stay.Application.Features.Commands.CreateStay;
 
 public class CreateStayCommand : IRequest<int>
 {
-
     public string? Name { get; set; } = string.Empty;
 
     public int NumberOfBeds { get; set; }

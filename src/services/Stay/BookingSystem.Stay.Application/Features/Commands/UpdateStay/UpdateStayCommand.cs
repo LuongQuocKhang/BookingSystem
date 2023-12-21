@@ -1,4 +1,5 @@
-﻿using BookingSystem.Stay.Domain.Entities;
+﻿using BookingSystem.Stay.Application.Dto;
+using BookingSystem.Stay.Domain.Entities;
 using MediatR;
 
 namespace BookingSystem.Stay.Application.Handlers.Commands.UpdateStay;
@@ -6,6 +7,7 @@ namespace BookingSystem.Stay.Application.Handlers.Commands.UpdateStay;
 public class UpdateStayCommand : IRequest<bool>
 {
     public int Id { get; set; }
+
     public string? Name { get; set; } = string.Empty;
 
     public int NumberOfBeds { get; set; }
@@ -15,8 +17,6 @@ public class UpdateStayCommand : IRequest<bool>
     public int NumberOfBathrooms { get; set; }
 
     public int NumberOfBedrooms { get; set; }
-
-    public int HostedBy { get; set; }
 
     public string? Address { get; set; }
 
@@ -38,11 +38,13 @@ public class UpdateStayCommand : IRequest<bool>
 
     public string? SpecialNotes { get; set; }
 
-    public List<AmenityEntity> Amenities { get; set; }
+    public List<StayAmenityDto>? Amenities { get; set; }
 
-    public List<RoomRateEntity> RoomRates { get; set; }
+    public List<RoomRateDto>? RoomRates { get; set; }
 
-    public List<StayUnAvailabilityEntity> StayAvailability { get; set; }
+    public List<StayUnAvailabilityDto>? StayUnAvailability { get; set; }
 
-    public List<StayImageEntity> StayImages { get; set; }
+    public List<StayImageDto>? StayImages { get; set; }
+
+    public List<StayTagDto>? StayTags { get; set; }
 }

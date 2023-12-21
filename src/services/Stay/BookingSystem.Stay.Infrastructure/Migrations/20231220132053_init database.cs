@@ -164,6 +164,13 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_StayAmenities", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_StayAmenities_Amenities_AmenityId",
+                        column: x => x.AmenityId,
+                        principalSchema: "Stay",
+                        principalTable: "Amenities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_StayAmenities_Stay_StayId",
                         column: x => x.StayId,
                         principalSchema: "Stay",
@@ -322,6 +329,12 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
                 column: "HostId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_StayAmenities_AmenityId",
+                schema: "Stay",
+                table: "StayAmenities",
+                column: "AmenityId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_StayAmenities_StayId",
                 schema: "Stay",
                 table: "StayAmenities",
@@ -362,10 +375,6 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Amenities",
-                schema: "Stay");
-
-            migrationBuilder.DropTable(
                 name: "RoomRates",
                 schema: "Stay");
 
@@ -395,6 +404,10 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "StayWishLists",
+                schema: "Stay");
+
+            migrationBuilder.DropTable(
+                name: "Amenities",
                 schema: "Stay");
 
             migrationBuilder.DropTable(

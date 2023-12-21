@@ -166,6 +166,8 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AmenityId");
+
                     b.HasIndex("StayId");
 
                     b.ToTable("StayAmenities", "Stay");
@@ -482,11 +484,19 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
 
             modelBuilder.Entity("BookingSystem.Stay.Domain.Entities.StayAmenityEntity", b =>
                 {
+                    b.HasOne("BookingSystem.Stay.Domain.Entities.AmenityEntity", "Amenity")
+                        .WithMany()
+                        .HasForeignKey("AmenityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("BookingSystem.Stay.Domain.Entities.StayEntity", "Stay")
                         .WithMany("Amenities")
                         .HasForeignKey("StayId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Amenity");
 
                     b.Navigation("Stay");
                 });

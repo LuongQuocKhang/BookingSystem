@@ -13,7 +13,7 @@ public interface IStayRepository
 
     Task<IReadOnlyCollection<StayViewModel>> GetStays();
 
-    Task<StayDetailsViewModel> GetStaysById(int id);
+    Task<StayDetailsViewModel?> GetStaysById(int id);
 
     Task<bool> ReviewStay(StayReviewEntity model);
 

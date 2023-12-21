@@ -4,18 +4,15 @@ using MediatR;
 
 namespace BookingSystem.Stay.Application.Handlers.Queries.GetStayDetails;
 
-public class GetStayDetailsQueryHandler : IRequestHandler<GetStayDetailsQuery, StayDetailsViewModel>
+public class GetStayDetailsQueryHandler(IStayRepository stayRepository) 
+    : IRequestHandler<GetStayDetailsQuery, StayDetailsViewModel?>
 {
-    private readonly IStayRepository _stayRepository;
+    private readonly IStayRepository _stayRepository = stayRepository;
 
-    public GetStayDetailsQueryHandler(IStayRepository stayRepository)
+    public async Task<StayDetailsViewModel?> Handle(GetStayDetailsQuery request, CancellationToken cancellationToken)
     {
-        _stayRepository = stayRepository;
-    }
-
-    public async Task<StayDetailsViewModel> Handle(GetStayDetailsQuery request, CancellationToken cancellationToken)
-    {
-        StayDetailsViewModel stay = await _stayRepository.GetStaysById(request.StayId).ConfigureAwait(false);
+        StayDetailsViewModel? stay = await _stayRepository.GetStaysById(request.StayId)
+            .ConfigureAwait(false);
 
         return stay;
     }

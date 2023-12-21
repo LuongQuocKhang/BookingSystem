@@ -1,4 +1,4 @@
-﻿using BookingSystem.Stay.Application.Dto;
+﻿using BookingSystem.Stay.Application.ViewModel;
 using BookingSystem.Stay.Domain.Entities;
 
 namespace BookingSystem.Stay.Application.ViewModel;
@@ -15,8 +15,8 @@ public class StayViewModel
     public double Rating { get; set; }
     public double PricePerNight { get; set; }
 
-    public List<StayAmenityDto>? Amenities { get; set; }
-    public List<RoomRateDto>? RoomRates { get; set; }
-    public List<StayImageDto>? StayImages { get; set; }
-    public List<StayTagDto>? StayTags { get; set; }
+    public List<StayAmenityViewModel>? Amenities { get; set; }
+    public List<RoomRateViewModel>? RoomRates { get; set; }
+    public List<StayImageViewModel>? StayImages { get; set; }
+    public List<StayTagViewModel>? StayTags { get; set; }
 }

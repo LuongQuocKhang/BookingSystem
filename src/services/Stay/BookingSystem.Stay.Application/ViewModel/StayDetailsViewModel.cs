@@ -17,10 +17,6 @@ public class StayDetailsViewModel
 
     public int NumberOfBedrooms { get; set; }
 
-    public int HostedId { get; set; }
-
-    public string? HostedDate { get; set; }
-
     public string? Address { get; set; }
 
     public double Rating { get; set; }
@@ -41,17 +37,17 @@ public class StayDetailsViewModel
 
     public string? SpecialNotes { get; set; }
 
-    public List<StayAmenityDto>? Amenities { get; set; }
+    public List<StayAmenityViewModel>? Amenities { get; set; }
 
-    public List<RoomRateDto>? RoomRates { get; set; }
+    public List<RoomRateViewModel>? RoomRates { get; set; }
 
-    public List<StayUnAvailabilityDto>? StayAvailability { get; set; }
+    public List<StayUnAvailabilityViewModel>? StayUnAvailability { get; set; }
 
-    public List<StayImageDto>? StayImages { get; set; }
+    public List<StayImageViewModel>? StayImages { get; set; }
 
     public List<StayReviewEntity>? StayReviews { get; set; }
 
-    public List<StayTagDto>? StayTags { get; set; }
+    public List<StayTagViewModel>? StayTags { get; set; }
 
     public HostEntity? Host { get; set; }
 }

@@ -1,6 +1,6 @@
-﻿namespace BookingSystem.Stay.Application.Dto;
+﻿namespace BookingSystem.Stay.Application.ViewModel;
 
-public class RoomRateDto
+public class RoomRateViewModel
 {
     public int Id { get; set; }
 
