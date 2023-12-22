@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using BookingSystem.Stay.Application.Features.Commands.CreateStay;
 using BookingSystem.Stay.Application.Dto;
 using BookingSystem.Stay.Domain.Entities;
 using BookingSystem.Stay.Application.ViewModel;
-using BookingSystem.Stay.Application.Handlers.Commands.UpdateStay;
+using BookingSystem.Stay.Application.Features.Commands.Stay.CreateStay;
+using BookingSystem.Stay.Application.Features.Commands.Stay.UpdateStay;
 
 namespace BookingSystem.Stay.Application.Mappings;
 

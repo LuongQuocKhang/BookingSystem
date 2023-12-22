@@ -13,7 +13,7 @@ namespace BookingSystem.Stay.Infrastructure.Migrations
 {
     [DbContext(typeof(StayContext))]
     [Migration("20231220132053_init database")]
-    partial class initdatabase
+    partial class InitDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

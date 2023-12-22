@@ -2,14 +2,16 @@ using BookingSystem.Stay.Api.Extensions;
 using BookingSystem.Stay.Application;
 using BookingSystem.Stay.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services
-   .AddAndConfigApiVersioning()
-   .AddAndConfigSwagger();
+builder.Services.AddConfigureSwaggerGen();
+
+builder.Services.AddOpenApi(builder.Configuration);
 
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -29,16 +31,12 @@ builder.Services.AddInfrastructure(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger(options => { options.RouteTemplate = $"swagger/{{documentName}}/docs.json"; });
-    app.UseSwaggerUI(options =>
-    {
-        foreach (var description in app.DescribeApiVersions())
-            options.SwaggerEndpoint($"/swagger/{description.GroupName}/docs.json", description.GroupName.ToUpperInvariant());
-    });
-}
 app.UseHttpsRedirection();
+
+app.UseUrlRewrite();
+
+IApiVersionDescriptionProvider apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+app.UseOpenApi(builder.Configuration, apiVersionDescriptionProvider);
 
 app.UseAuthentication();
 app.UseAuthorization();

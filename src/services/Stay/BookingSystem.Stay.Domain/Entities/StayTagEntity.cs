@@ -10,5 +10,5 @@ public class StayTagEntity : EntityBase
     public string? Label { get; set; } = string.Empty;
 
     [ForeignKey("StayId")]
-    public StayEntity Stay { get; set; }
+    public StayEntity? Stay { get; set; }
 }

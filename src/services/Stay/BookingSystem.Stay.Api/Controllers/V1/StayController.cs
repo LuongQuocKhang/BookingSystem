@@ -1,23 +1,22 @@
 #region Using Commands, queries
-using BookingSystem.Stay.Application.Handlers.Commands.DeleteStay;
-using BookingSystem.Stay.Application.Handlers.Commands.ReviewStay;
-using BookingSystem.Stay.Application.Handlers.Commands.SaveStayToWishlist;
-using BookingSystem.Stay.Application.Handlers.Commands.SearchStay;
-using BookingSystem.Stay.Application.Handlers.Commands.ShareStay;
-using BookingSystem.Stay.Application.Handlers.Queries.GetStayDetails;
-using BookingSystem.Stay.Application.Features.Commands.CreateStay;
-using BookingSystem.Stay.Application.Handlers.Commands.AddStayToTrip;
-using BookingSystem.Stay.Application.Handlers.Commands.UpdateStay;
-using BookingSystem.Stay.Application.Handlers.Queries.GetStays;
-using BookingSystem.Stay.Application.Dto;
+using BookingSystem.Stay.Application.Features.Commands.Stay.ReviewStay;
+using BookingSystem.Stay.Application.Features.Commands.Stay.SearchStay;
+using BookingSystem.Stay.Application.Features.Commands.Stay.CreateStay;
+using BookingSystem.Stay.Application.Features.Commands.Stay.UpdateStay;
+using BookingSystem.Stay.Application.Features.Queries.Stay.GetStays;
+using BookingSystem.Stay.Application.Features.Queries.Stay.GetStayDetails;
+using BookingSystem.Stay.Application.Features.Commands.Stay.ShareStay;
+using BookingSystem.Stay.Application.Features.Commands.Stay.SaveStayToWishlist;
+using BookingSystem.Stay.Application.Features.Commands.Stay.DeleteStay;
+using BookingSystem.Stay.Application.Features.Commands.Stay.AddStayToTrip;
 #endregion
 
-using Asp.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using BookingSystem.Stay.Application.ViewModel;
+using BookingSystem.Stay.Application.Dto;
 
 namespace BookingSystem.Stay.Api.Controllers.V1;
 
@@ -54,7 +53,7 @@ public class StaysController(ILogger<StaysController> logger, IMediator mediator
     [ProducesResponseType((int)HttpStatusCode.OK)]
     public async Task<ActionResult<bool>> ReviewStay(int stayId, ReviewStayDto model)
     {
-        ReviewStayCommand command = new ReviewStayCommand()
+        ReviewStayCommand command = new()
         {
             Comment = model.Comment,
             Rating = model.Rating,

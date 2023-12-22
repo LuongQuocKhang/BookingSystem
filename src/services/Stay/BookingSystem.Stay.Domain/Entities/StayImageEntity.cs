@@ -11,5 +11,5 @@ public class StayImageEntity : EntityBase
     public int StayId { get; set; }
 
     [ForeignKey("StayId")]
-    public StayEntity Stay { get; set; }
+    public StayEntity? Stay { get; set; }
 }
