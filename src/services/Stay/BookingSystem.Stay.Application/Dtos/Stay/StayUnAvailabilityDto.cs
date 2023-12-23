@@ -2,7 +2,7 @@
 
 public class StayUnAvailabilityDto
 {
-    public int Id { get; set; }
-
     public DateTime? UnAvaiableDate { get; set; }
+
+    public int StayId { get; set; }
 }

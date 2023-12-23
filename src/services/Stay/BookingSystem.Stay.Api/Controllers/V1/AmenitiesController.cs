@@ -53,7 +53,7 @@ public class AmenitiesController(IMediator mediator, ILogger<AmenitiesController
         return Ok(result);
     }
 
-    [HttpDelete("{amenityId}/delete-amenitie")]
+    [HttpDelete("{amenityId}/delete-amenity")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]

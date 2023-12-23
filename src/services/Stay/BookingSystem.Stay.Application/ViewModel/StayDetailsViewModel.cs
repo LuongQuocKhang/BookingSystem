@@ -39,15 +39,15 @@ public class StayDetailsViewModel
 
     public List<StayAmenityViewModel>? Amenities { get; set; }
 
-    public List<RoomRateViewModel>? RoomRates { get; set; }
+    public List<StayRoomRateViewModel>? RoomRates { get; set; }
 
     public List<StayUnAvailabilityViewModel>? StayUnAvailability { get; set; }
 
     public List<StayImageViewModel>? StayImages { get; set; }
 
-    public List<StayReviewEntity>? StayReviews { get; set; }
+    public List<StayReviewViewModel>? StayReviews { get; set; }
 
     public List<StayTagViewModel>? StayTags { get; set; }
 
-    public HostEntity? Host { get; set; }
+    public HostViewModel? Host { get; set; }
 }

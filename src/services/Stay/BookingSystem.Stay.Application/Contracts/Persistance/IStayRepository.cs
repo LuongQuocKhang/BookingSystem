@@ -11,9 +11,9 @@ public interface IStayRepository
 
     Task DeleteStay(int id);
 
-    Task<IReadOnlyCollection<StayViewModel>> GetStays();
+    Task<IReadOnlyCollection<StayEntity>> GetStays();
 
-    Task<StayDetailsViewModel?> GetStaysById(int id);
+    Task<StayEntity?> GetStaysById(int id);
 
     Task<bool> ReviewStay(StayReviewEntity model);
 

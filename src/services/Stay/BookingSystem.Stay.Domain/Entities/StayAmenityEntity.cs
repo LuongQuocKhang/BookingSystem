@@ -7,6 +7,7 @@ namespace BookingSystem.Stay.Domain.Entities;
 public class StayAmenityEntity : EntityBase
 {
     public int AmenityId { get; set; }
+
     public int StayId { get; set; }
 
     [ForeignKey("StayId")]

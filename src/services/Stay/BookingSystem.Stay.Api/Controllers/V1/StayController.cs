@@ -120,7 +120,7 @@ public class StaysController(ILogger<StaysController> logger, IMediator mediator
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<ActionResult<int>> UpdateStay(UpdateStayCommand command)
+    public async Task<ActionResult<int>> UpdateStay([FromBody]UpdateStayCommand command)
     {
         bool result = await _mediator.Send(command);
         return Ok(result);

@@ -1,4 +1,5 @@
 ﻿using BookingSystem.Stay.Application.Dto;
+using BookingSystem.Stay.Application.Dtos.Stay;
 using BookingSystem.Stay.Domain.Entities;
 using MediatR;
 

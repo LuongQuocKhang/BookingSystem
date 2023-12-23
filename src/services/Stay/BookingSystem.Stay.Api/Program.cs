@@ -1,4 +1,5 @@
 using BookingSystem.Stay.Api.Extensions;
+using BookingSystem.Stay.Api.Middlewares;
 using BookingSystem.Stay.Application;
 using BookingSystem.Stay.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -32,6 +33,8 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
+
+app.UseCustomExceptionHandler();
 
 app.UseUrlRewrite();
 

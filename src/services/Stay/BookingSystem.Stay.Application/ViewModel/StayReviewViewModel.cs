@@ -1,6 +1,6 @@
 ﻿namespace BookingSystem.Stay.Application.ViewModel;
 
-public class ReviewStayViewModel
+public class StayReviewViewModel
 {
     public int Id { get; set; }
 
@@ -9,4 +9,6 @@ public class ReviewStayViewModel
     public string? Comment { get; set; } = string.Empty;
 
     public int UserId { get; set; }
+
+    public int StayId { get; set; }
 }
