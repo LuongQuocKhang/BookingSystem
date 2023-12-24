@@ -38,7 +38,7 @@ namespace BookingSystem.Stay.Domain.Entities
 
         public string? SpecialNotes { get; set; }
 
-        public virtual ICollection<StayAmenityEntity>? Amenities { get; set; }
+        public virtual ICollection<StayAmenityEntity>? StayAmenities { get; set; }
 
         public virtual ICollection<RoomRateEntity>? RoomRates { get; set; }
 

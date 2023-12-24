@@ -75,8 +75,6 @@ public class CustomExceptionHandlerMiddleware
         }
     }
 
-    // Need update to comply with the Mantu API guidline
-    // https://dev.azure.com/Mantu/SoftwareArchitecture/_wiki/wikis/API%20Guidelines/6447/REST-API-Guidelines?anchor=7.10.2.-error-condition-responses
     private async Task HandleExceptionAsync(HttpContext context, Exception exception, int statusCode = (int)HttpStatusCode.InternalServerError)
     {
         _logger.LogError(exception, exception.Message);

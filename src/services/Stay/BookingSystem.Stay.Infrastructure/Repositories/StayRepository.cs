@@ -17,19 +17,19 @@ public class StayRepository(StayContext context, IMapper mapper, ILogger<StayRep
 
     private readonly ILogger<StayRepository> _logger = logger;
 
-    public Task<bool> AddStayToTrip(int stayId, int tripId)
+    public Task<bool> AddStayToTrip(int stayId, int tripId, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<int> CreateStay(Domain.Entities.StayEntity model)
+    public async Task<int> CreateStay(Domain.Entities.StayEntity model, CancellationToken cancellationToken = default)
     {
         try
         {
-            EntityEntry<StayEntity> addedStay = await _context.Stays.AddAsync(model)
-            .ConfigureAwait(false);
+            EntityEntry<StayEntity> addedStay = await _context.Stays.AddAsync(model, cancellationToken)
+                .ConfigureAwait(false);
 
-            await _context.SaveChangesAsync().ConfigureAwait(false);
+            await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
             return addedStay.Entity.Id;
         }
@@ -40,16 +40,16 @@ public class StayRepository(StayContext context, IMapper mapper, ILogger<StayRep
         }
     }
 
-    public async Task DeleteStay(int id)
+    public async Task DeleteStay(int id, CancellationToken cancellationToken = default)
     {
-        StayEntity? stay = await _context.Stays.FirstOrDefaultAsync(x => x.Id == id)
+        StayEntity? stay = await _context.Stays.FirstOrDefaultAsync(x => x.Id == id, cancellationToken: cancellationToken)
             .ConfigureAwait(false);
 
         if (stay != null)
         {
             stay.IsDeleted = true;
 
-            await _context.SaveChangesAsync().ConfigureAwait(false);
+            await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
     }
 
@@ -58,7 +58,7 @@ public class StayRepository(StayContext context, IMapper mapper, ILogger<StayRep
         List<StayEntity> dbStays = await _context.Stays
             .AsNoTracking()
             .Include(x => x.RoomRates)
-            .Include(x => x.Amenities!)
+            .Include(x => x.StayAmenities!)
                 .ThenInclude(x => x.Amenity)
             .Include(x => x.StayImages)
             .Include(x => x.StayTags)
@@ -74,7 +74,7 @@ public class StayRepository(StayContext context, IMapper mapper, ILogger<StayRep
                 NumberOfGuests = x.NumberOfGuests,
                 PricePerNight = x.PricePerNight,
                 Rating = x.Rating,
-                Amenities = x.Amenities,
+                StayAmenities = x.StayAmenities,
                 RoomRates = x.RoomRates,
                 StayImages = x.StayImages,
                 StayTags = x.StayTags
@@ -92,7 +92,7 @@ public class StayRepository(StayContext context, IMapper mapper, ILogger<StayRep
         StayEntity? stays = await _context.Stays
             .AsNoTracking()
             .Include(x => x.StayTags)
-            .Include(x => x.Amenities!)
+            .Include(x => x.StayAmenities!)
                 .ThenInclude(x => x.Amenity)
             .Include(x => x.RoomRates)
             .Include(x => x.StayUnAvailability)
@@ -107,22 +107,22 @@ public class StayRepository(StayContext context, IMapper mapper, ILogger<StayRep
         return stays;
     }
 
-    public async Task<bool> ReviewStay(StayReviewEntity model)
+    public async Task<bool> ReviewStay(StayReviewEntity model, CancellationToken cancellationToken = default)
     {
-        EntityEntry<StayReviewEntity>? review = await _context.StayReviews.AddAsync(model)
+        EntityEntry<StayReviewEntity>? review = await _context.StayReviews.AddAsync(model, cancellationToken)
             .ConfigureAwait(false);
         return review != null;
     }
 
-    public async Task<bool> SaveStayToWishList(StayWishListEntity wishList)
+    public async Task<bool> SaveStayToWishList(StayWishListEntity wishList, CancellationToken cancellationToken = default)
     {
-        EntityEntry<StayWishListEntity>? stay = await _context.StayWishLists.AddAsync(wishList)
+        EntityEntry<StayWishListEntity>? stay = await _context.StayWishLists.AddAsync(wishList, cancellationToken)
             .ConfigureAwait(false);
-        await _context.SaveChangesAsync().ConfigureAwait(false);
+        await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         return stay != null;
     }
 
-    public async Task<bool> ShareStay(int stayId, IEnumerable<int> userIds)
+    public async Task<bool> ShareStay(int stayId, IEnumerable<int> userIds, CancellationToken cancellationToken = default)
     {
         foreach (int userId in userIds)
         {
@@ -132,14 +132,14 @@ public class StayRepository(StayContext context, IMapper mapper, ILogger<StayRep
                 UserId = userId
             };
 
-            _context.StayShares.Add(model);
+            await _context.StayShares.AddAsync(model, cancellationToken).ConfigureAwait(false);
         }
-        await _context.SaveChangesAsync().ConfigureAwait(false);
+        await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
         return true;
     }
 
-    public async Task<bool> UpdateStay(Domain.Entities.StayEntity model)
+    public async Task<bool> UpdateStay(Domain.Entities.StayEntity model, CancellationToken cancellationToken = default)
     {
         using var transaction = _context.Database.BeginTransaction();
 
@@ -175,14 +175,14 @@ public class StayRepository(StayContext context, IMapper mapper, ILogger<StayRep
                 #endregion
 
                 #region Update Amenities
-                if (model.Amenities != null)
+                if (model.StayAmenities != null)
                 {
-                    if (stayDb.Amenities != null && stayDb.Amenities.Count != 0)
+                    if (stayDb.StayAmenities != null && stayDb.StayAmenities.Count != 0)
                     {
-                        _context.StayAmenities.RemoveRange(stayDb.Amenities);
+                        _context.StayAmenities.RemoveRange(stayDb.StayAmenities);
                     }
 
-                    _context.StayAmenities.AddRange(model.Amenities);
+                    _context.StayAmenities.AddRange(model.StayAmenities);
                 }
                 #endregion
 
@@ -220,7 +220,7 @@ public class StayRepository(StayContext context, IMapper mapper, ILogger<StayRep
 
                 _context.Stays.Update(stayDb);
 
-                await _context.SaveChangesAsync().ConfigureAwait(false);
+                await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
             }
 
             transaction.Commit();

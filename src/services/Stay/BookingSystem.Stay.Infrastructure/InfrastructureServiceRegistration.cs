@@ -12,9 +12,10 @@ public static class InfrastructureServiceRegistration
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<StayContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("OrderingConnectionString")));
+                options.UseSqlServer(configuration.GetConnectionString("BookingSystem")));
 
-        services.AddScoped<IStayRepository, StayRepository>();
+        services.AddTransient<IStayRepository, StayRepository>();
+        services.AddTransient<IAmenityRepository, AmenityRepository>();
 
         //services.Configure<EmailSettings>(x => configuration.GetSection("EmailSettings"));
         //services.AddTransient<IEmailService, EmailService>();

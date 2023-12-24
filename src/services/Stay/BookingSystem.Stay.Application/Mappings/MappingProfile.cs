@@ -5,6 +5,7 @@ using BookingSystem.Stay.Application.ViewModel;
 using BookingSystem.Stay.Application.Features.Commands.Stay.CreateStay;
 using BookingSystem.Stay.Application.Features.Commands.Stay.UpdateStay;
 using BookingSystem.Stay.Application.Dtos.Stay;
+using BookingSystem.Stay.Application.ViewModel.Amenity;
 
 namespace BookingSystem.Stay.Application.Mappings;
 
@@ -16,7 +17,6 @@ public class MappingProfile : Profile
         CreateMap<CreateStayCommand, StayEntity>().ReverseMap();
 
         CreateMap<StayAmenityDto, StayAmenityEntity>()
-            .ForPath(dest => dest.Amenity!.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.AmenityId, opt => opt.MapFrom(src => src.AmenityId))
             .ReverseMap();
 
@@ -31,11 +31,11 @@ public class MappingProfile : Profile
         CreateMap<StayViewModel, StayEntity>().ReverseMap();
 
         CreateMap<StayAmenityViewModel, StayAmenityEntity>()
-            .ForPath(dest => dest.Amenity!.Name, opt => opt.MapFrom(src => src.Name))
             .ReverseMap();
 
         CreateMap<StayAmenityEntity, StayAmenityViewModel>()
             .ForPath(dest => dest.Name, opt => opt.MapFrom(src => src.Amenity!.Name))
+            .ForPath(dest => dest.Icon, opt => opt.MapFrom(src => src.Amenity!.Icon))
             .ReverseMap();
 
         CreateMap<StayRoomRateViewModel, RoomRateEntity>().ReverseMap();
@@ -55,5 +55,9 @@ public class MappingProfile : Profile
         #endregion
 
         CreateMap<StayEntity, StayEntity>().ReverseMap();
+
+        #region Get Amenities
+        CreateMap<AmenityEntity, AmenityViewModel>().ReverseMap();
+        #endregion
     }
 }

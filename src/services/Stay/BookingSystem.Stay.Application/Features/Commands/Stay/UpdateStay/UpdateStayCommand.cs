@@ -39,7 +39,7 @@ public class UpdateStayCommand : IRequest<bool>
 
     public string? SpecialNotes { get; set; }
 
-    public List<StayAmenityDto>? Amenities { get; set; }
+    public List<StayAmenityDto>? StayAmenities { get; set; }
 
     public List<RoomRateDto>? RoomRates { get; set; }
 

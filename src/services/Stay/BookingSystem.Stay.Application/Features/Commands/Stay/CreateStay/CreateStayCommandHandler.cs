@@ -14,7 +14,7 @@ namespace BookingSystem.Stay.Application.Features.Commands.Stay.CreateStay
         {
             StayEntity model = _mapper.Map<StayEntity>(request);
 
-            int stayId = await _stayRepository.CreateStay(model).ConfigureAwait(false);
+            int stayId = await _stayRepository.CreateStay(model, cancellationToken).ConfigureAwait(false);
 
             return stayId;
         }

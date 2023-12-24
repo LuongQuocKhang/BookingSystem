@@ -6,5 +6,7 @@ public class StayAmenityDto
 
     public string? Name { get; set; }
 
+    public string? Icon { get; set; }
+
     public int StayId { get; set; }
 }

@@ -22,7 +22,7 @@ public class StayViewModel
 
     public double PricePerNight { get; set; }
 
-    public List<StayAmenityViewModel>? Amenities { get; set; }
+    public List<StayAmenityViewModel>? StayAmenities { get; set; }
 
     public List<StayRoomRateViewModel>? RoomRates { get; set; }
 
