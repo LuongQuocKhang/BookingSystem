@@ -1,7 +1,7 @@
 ﻿using BookingSystem.Stay.Application.Message;
 using BookingSystem.Stay.Application.ViewModel.Amenity;
 
-namespace BookingSystem.Stay.Application.Features.Queries.Amenity;
+namespace BookingSystem.Stay.Application.Features.Queries.Amenity.GetAmenities;
 
 public class GetAmenitiesQuery : ICachedQuery<IReadOnlyCollection<AmenityViewModel>>
 {

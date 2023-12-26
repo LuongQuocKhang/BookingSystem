@@ -8,9 +8,9 @@ public interface IAmenityRepository
 
     Task<AmenityEntity?> GetAmenity(int id);
 
-    Task<bool> UpdateAmenity(AmenityEntity entity);
+    Task<bool> UpdateAmenity(AmenityEntity entity, CancellationToken cancellationToken = default);
 
-    Task<bool> CreateAmenity(AmenityEntity entity);
+    Task<int> CreateAmenity(AmenityEntity entity, CancellationToken cancellationToken = default);
 
-    Task<bool> DeleteAmenity(int id);
+    Task<bool> DeleteAmenity(int id, CancellationToken cancellationToken = default);
 }

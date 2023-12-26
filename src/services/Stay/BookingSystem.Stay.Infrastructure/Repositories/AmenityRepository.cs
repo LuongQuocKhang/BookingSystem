@@ -3,12 +3,15 @@ using BookingSystem.Stay.Application.Contracts.Persistance;
 using BookingSystem.Stay.Domain.Entities;
 using BookingSystem.Stay.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
+using System.Threading;
 
 namespace BookingSystem.Stay.Infrastructure.Repositories;
 
-public class AmenityRepository(StayContext context, IMapper mapper, ILogger<AmenityRepository> logger) : IAmenityRepository
+public class AmenityRepository(StayContext context, IMapper mapper, ILogger<AmenityRepository> logger) 
+    : IAmenityRepository
 {
     private readonly StayContext _context = context;
 
@@ -16,22 +19,27 @@ public class AmenityRepository(StayContext context, IMapper mapper, ILogger<Amen
 
     private readonly ILogger<AmenityRepository> _logger = logger;
 
-    public Task<bool> CreateAmenity(AmenityEntity entity)
+    public async Task<int> CreateAmenity(AmenityEntity entity, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        EntityEntry<AmenityEntity> amenity = await _context.Amenities.AddAsync(entity, cancellationToken)
+            .ConfigureAwait(false);
+
+        await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+
+        return amenity.Entity.Id;
     }
 
-    public async Task<bool> DeleteAmenity(int id)
+    public async Task<bool> DeleteAmenity(int id, CancellationToken cancellationToken = default)
     {
         AmenityEntity? amenity = await _context.Amenities
-            .FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted)
+            .FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted, cancellationToken)
             .ConfigureAwait(false);
 
         if (amenity == null) return false;
 
         amenity.IsDeleted = true;
 
-        await _context.SaveChangesAsync().ConfigureAwait(false);
+        await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
         return true;
     }
@@ -57,10 +65,10 @@ public class AmenityRepository(StayContext context, IMapper mapper, ILogger<Amen
         return amenity;
     }
 
-    public async Task<bool> UpdateAmenity(AmenityEntity entity)
+    public async Task<bool> UpdateAmenity(AmenityEntity entity, CancellationToken cancellationToken = default)
     {
         AmenityEntity? amenity = await _context.Amenities
-            .FirstOrDefaultAsync(x => x.Id == entity.Id && !x.IsDeleted)
+            .FirstOrDefaultAsync(x => x.Id == entity.Id && !x.IsDeleted, cancellationToken)
             .ConfigureAwait(false);
 
         if (amenity == null) return false;
@@ -69,7 +77,7 @@ public class AmenityRepository(StayContext context, IMapper mapper, ILogger<Amen
         amenity.Name = entity.Name;
         amenity.Icon = entity.Icon;
 
-        await _context.SaveChangesAsync().ConfigureAwait(false);
+        await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
         return true;
     }

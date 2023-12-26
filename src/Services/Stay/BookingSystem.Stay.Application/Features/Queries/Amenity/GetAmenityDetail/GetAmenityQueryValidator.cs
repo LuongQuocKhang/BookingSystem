@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingSystem.Stay.Application.Features.Queries.Amenity
+namespace BookingSystem.Stay.Application.Features.Queries.Amenity.GetAmenities
 {
-    internal class GetAmenitiesQueryValidator
+    internal class GetAmenityQueryValidator
     {
     }
 }

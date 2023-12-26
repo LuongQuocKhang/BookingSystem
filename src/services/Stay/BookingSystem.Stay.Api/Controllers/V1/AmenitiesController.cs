@@ -6,10 +6,11 @@ using System.Net;
 
 #region commands, queries
 using BookingSystem.Stay.Application.ViewModel;
-using BookingSystem.Stay.Application.Features.Queries.Amenity;
 using BookingSystem.Stay.Application.Features.Commands.Amenity.CreateAmenity;
 using BookingSystem.Stay.Application.Features.Commands.Amenity.UpdateAmenity;
 using BookingSystem.Stay.Application.Features.Commands.Amenity.DeleteAmenity;
+using BookingSystem.Stay.Application.Features.Queries.Amenity.GetAmenities;
+using BookingSystem.Stay.Application.ViewModel.Amenity;
 #endregion
 
 namespace BookingSystem.Stay.Api.Controllers.V1;
@@ -27,9 +28,19 @@ public class AmenitiesController(IMediator mediator, ILogger<AmenitiesController
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<ActionResult<IEnumerable<StayViewModel>>> GetAmenities()
+    public async Task<ActionResult<IReadOnlyCollection<AmenityViewModel>>> GetAmenities()
     {
-        var result = await _mediator.Send(new GetAmenitiesQuery());
+        IReadOnlyCollection<AmenityViewModel> result = await _mediator.Send(new GetAmenitiesQuery());
+        return Ok(result);
+    }
+
+    [HttpGet]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    public async Task<ActionResult<AmenityViewModel>> GetAmenityDetail(int amenityId)
+    {
+        AmenityViewModel result = await _mediator.Send(new GetAmenityQuery());
         return Ok(result);
     }
 

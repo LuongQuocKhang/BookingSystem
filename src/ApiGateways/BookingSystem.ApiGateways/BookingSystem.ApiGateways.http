@@ -1,6 +1,0 @@
-@BookingSystem.ApiGateways_HostAddress = http://localhost:5074
-
-GET {{BookingSystem.ApiGateways_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
