@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
 namespace BookingSystem.Stay.Application.Features.Commands.Amenity.DeleteAmenity;
 
-public class DeleteAmenityCommand
+public class DeleteAmenityCommand : IRequest<bool>
 {
+    public int Id { get; set; }
 }

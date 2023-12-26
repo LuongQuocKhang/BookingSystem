@@ -68,7 +68,7 @@ public class AmenityRepository(StayContext context, IMapper mapper, ILogger<Amen
     public async Task<bool> UpdateAmenity(AmenityEntity entity, CancellationToken cancellationToken = default)
     {
         AmenityEntity? amenity = await _context.Amenities
-            .FirstOrDefaultAsync(x => x.Id == entity.Id && !x.IsDeleted, cancellationToken)
+            .FirstOrDefaultAsync(x => x.Id == entity.Id, cancellationToken)
             .ConfigureAwait(false);
 
         if (amenity == null) return false;
@@ -76,6 +76,8 @@ public class AmenityRepository(StayContext context, IMapper mapper, ILogger<Amen
         amenity.IsDeleted = entity.IsDeleted;
         amenity.Name = entity.Name;
         amenity.Icon = entity.Icon;
+
+        _context.Amenities.Update(amenity);
 
         await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 

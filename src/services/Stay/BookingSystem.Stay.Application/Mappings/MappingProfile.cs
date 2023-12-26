@@ -6,6 +6,8 @@ using BookingSystem.Stay.Application.Features.Commands.Stay.CreateStay;
 using BookingSystem.Stay.Application.Features.Commands.Stay.UpdateStay;
 using BookingSystem.Stay.Application.Dtos.Stay;
 using BookingSystem.Stay.Application.ViewModel.Amenity;
+using BookingSystem.Stay.Application.Features.Commands.Amenity.CreateAmenity;
+using BookingSystem.Stay.Application.Features.Commands.Amenity.UpdateAmenity;
 
 namespace BookingSystem.Stay.Application.Mappings;
 
@@ -58,6 +60,14 @@ public class MappingProfile : Profile
 
         #region Get Amenities
         CreateMap<AmenityEntity, AmenityViewModel>().ReverseMap();
+        #endregion
+
+        #region Create Amenity
+        CreateMap<CreateAmenityCommand, AmenityEntity>().ReverseMap();
+        #endregion
+
+        #region Update Amenity
+        CreateMap<UpdateAmenityCommand, AmenityEntity>().ReverseMap();
         #endregion
     }
 }

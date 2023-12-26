@@ -34,13 +34,16 @@ public class AmenitiesController(IMediator mediator, ILogger<AmenitiesController
         return Ok(result);
     }
 
-    [HttpGet]
+    [HttpGet("{amenityId}")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<ActionResult<AmenityViewModel>> GetAmenityDetail(int amenityId)
     {
-        AmenityViewModel result = await _mediator.Send(new GetAmenityQuery());
+        AmenityViewModel result = await _mediator.Send(new GetAmenityQuery()
+        {
+            Id = amenityId
+        });
         return Ok(result);
     }
 
@@ -48,9 +51,9 @@ public class AmenitiesController(IMediator mediator, ILogger<AmenitiesController
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<ActionResult<IEnumerable<StayViewModel>>> CreateAmenitie(int amenitieId)
+    public async Task<ActionResult<IEnumerable<StayViewModel>>> CreateAmenity(CreateAmenityCommand command)
     {
-        var result = await _mediator.Send(new CreateAmenityCommand());
+        var result = await _mediator.Send(command);
         return Ok(result);
     }
 
@@ -58,7 +61,7 @@ public class AmenitiesController(IMediator mediator, ILogger<AmenitiesController
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<ActionResult<IEnumerable<StayViewModel>>> UpdateAmenitie(UpdateAmenityCommand command)
+    public async Task<ActionResult<IEnumerable<StayViewModel>>> UpdateAmenity(UpdateAmenityCommand command)
     {
         var result = await _mediator.Send(command);
         return Ok(result);
@@ -68,9 +71,12 @@ public class AmenitiesController(IMediator mediator, ILogger<AmenitiesController
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<ActionResult<IEnumerable<StayViewModel>>> DeleteAmenitie(int amenityId)
+    public async Task<ActionResult<IEnumerable<StayViewModel>>> DeleteAmenity(int amenityId)
     {
-        var result = await _mediator.Send(new DeleteAmenityCommand());
+        var result = await _mediator.Send(new DeleteAmenityCommand()
+        {
+            Id = amenityId
+        });
         return Ok(result);
     }
 }

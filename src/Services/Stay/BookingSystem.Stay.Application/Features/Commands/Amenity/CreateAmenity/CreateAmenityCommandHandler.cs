@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using BookingSystem.Stay.Application.Contracts.Persistance;
-using BookingSystem.Stay.Application.Features.Commands.Stay.CreateStay;
 using BookingSystem.Stay.Domain.Entities;
 using MediatR;
 
