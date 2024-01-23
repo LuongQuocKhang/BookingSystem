@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option csharp_namespace = "BookingSystem.Promotion.gRPC.Protos";
+
+service PromotionService {
+  // Sends a greeting
+  rpc GetPromotions (GetPromotionsQuery) returns (stream GetPromotionResponse);
+}
+
+message GetPromotionsQuery {
+	int32 stayId = 1;
+}
+
+message PromotionViewModel {
+	int32 Id = 1;
+	string Name = 2;
+	string Description = 3;
+	double PercentageDiscount = 4;
+	double PriceDiscount = 5;
+	string FromDate = 6;
+	string ToDate = 7;
+	int32 DiscountType = 8;
+}
+
+message GetPromotionResponse {
+	repeated PromotionViewModel StayPromotions = 1;
+}

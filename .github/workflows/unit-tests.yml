@@ -1,0 +1,37 @@
+name: Unit Tests
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.0'  # Change the version as per your project's requirements
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+      # Stay Unit Test
+    - name: Build and test BookingSystem.Stay.Infrastructure.Test
+      run: dotnet test src/tests/Stay/BookingSystem.Stay.Infrastructure.Test/BookingSystem.Stay.Infrastructure.Test.csproj --configuration Release --no-restore --verbosity normal
+
+    - name: Build and test BookingSystem.Stay.Application.Test
+      run: dotnet test src/tests/Stay/BookingSystem.Stay.Application.Test/BookingSystem.Stay.Application.Test.csproj --configuration Release --no-restore --verbosity normal
+      
+    - name: Build and test BookingSystem.Stay.Api.Test
+      run: dotnet test src/tests/Stay/BookingSystem.Stay.Api.Test/BookingSystem.Stay.Api.Test.csproj --configuration Release --no-restore --verbosity normal
+    # Stay Unit Test
+    - name: Build and test BookingSystem.Promotion.Api.Test
+      run: dotnet test src/tests/Promotion/BookingSystem.Promotion.Api.Test/BookingSystem.Promotion.Api.Test.csproj --configuration Release --no-restore --verbosity normal

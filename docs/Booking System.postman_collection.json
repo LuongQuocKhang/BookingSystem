@@ -1,0 +1,1083 @@
+{
+	"info": {
+		"_postman_id": "c2ed5928-4302-47b6-ab71-f974033f7b16",
+		"name": "Booking System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12714198",
+		"_collection_link": "https://martian-sunset-374261.postman.co/workspace/New-Team-Workspace~58ef4d88-9f1c-42c7-85c2-7430a3796ba9/collection/12714198-c2ed5928-4302-47b6-ab71-f974033f7b16?action=share&source=collection_link&creator=12714198"
+	},
+	"item": [
+		{
+			"name": "Stay",
+			"item": [
+				{
+					"name": "Get Stays",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{stay_url}}/api/v1/stays",
+							"host": [
+								"{{stay_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"stays"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Stay By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{stay_url}}/api/v1/stays/:stayId",
+							"host": [
+								"{{stay_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"stays",
+								":stayId"
+							],
+							"variable": [
+								{
+									"key": "stayId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Review Stay",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rating\": 3,\r\n  \"comment\": \"string\",\r\n  \"userId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{stay_url}}/api/v1/stays/:stayId/review-stay",
+							"host": [
+								"{{stay_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"stays",
+								":stayId",
+								"review-stay"
+							],
+							"variable": [
+								{
+									"key": "stayId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Share Stay",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  2\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{stay_url}}/api/v1/stays/:stayId/share-stay",
+							"host": [
+								"{{stay_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"stays",
+								":stayId",
+								"share-stay"
+							],
+							"variable": [
+								{
+									"key": "stayId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add To Wishlist",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{stay_url}}/api/v1/stays/:stayId/add-to-wishlist/:wishlistId",
+							"host": [
+								"{{stay_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"stays",
+								":stayId",
+								"add-to-wishlist",
+								":wishlistId"
+							],
+							"variable": [
+								{
+									"key": "stayId",
+									"value": "1"
+								},
+								{
+									"key": "wishlistId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add To Trip",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{stay_url}}/api/v1/stays/:stayId/add-to-trip/:tripId",
+							"host": [
+								"{{stay_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"stays",
+								":stayId",
+								"add-to-trip",
+								":tripId"
+							],
+							"variable": [
+								{
+									"key": "stayId",
+									"value": ""
+								},
+								{
+									"key": "tripId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Stay",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Beach House in Collingwood\",\r\n  \"numberOfBeds\": 6,\r\n  \"numberOfGuests\": 6,\r\n  \"numberOfBathrooms\": 3,\r\n  \"numberOfBeedrooms\": 2,\r\n  \"HostId\": 1,\r\n  \"address\": \"Tokyo, Jappan\",\r\n  \"rating\": 4.5,\r\n  \"pricePerNight\": 119,\r\n  \"stayInformation\": \"<p><span>Providing lake views, The Symphony 9 Tam Coc in Ninh Binh provides accommodation, an outdoor swimming pool, a bar, a shared lounge, a garden and barbecue facilities. Complimentary WiFi is provided.</span>&nbsp;<br>    <br>    <span>There is a private bathroom with bidet in all units, along with a hairdryer and free toiletries.</span>&nbsp;<br>    <br>    <span>The Symphony 9 Tam Coc offers a terrace. Both a bicycle rental service and a car rental service are available at the accommodation, while cycling can be enjoyed nearby.</span></p>\",\r\n  \"serviceCharge\": 10,\r\n  \"cancellationPolicy\": \"<p>Refund 50% of the booking value when customers cancel the room within 48 hours after successful booking and 14 days before the check-in time.</p> <br> <p>Then, cancel the room 14 days before the check-in time, get a 50% refund of the total amount paid (minus the service fee).</p>\",\r\n  \"checkInTime\": \"08:00 am - 12:00 am\",\r\n  \"checkOutTime\": \"02:00 pm - 04:00 pm\",\r\n  \"specialNotes\": \"<ul>    <li>        Ban and I will work together to keep the landscape and environment green and clean by not littering, not using stimulants and respecting people around.    </li>    <li>        Do not sing karaoke past 11:30    </li></ul>\",\r\n  \"amenities\": [\r\n    {\r\n      \"amenityId\": 1\r\n    },\r\n    {\r\n      \"amenityId\": 3\r\n    }\r\n  ],\r\n  \"roomRates\": [\r\n    {\r\n      \"name\": \"Monday - Thursday\",\r\n      \"value\": \"199\"\r\n    },\r\n    {\r\n      \"name\": \"Friday - Sunday\",\r\n      \"value\": \"219\"\r\n    },\r\n    {\r\n      \"name\": \"Rent by month\",\r\n      \"value\": \"-8.34 %\"\r\n    },\r\n    {\r\n      \"name\": \"Minimum number of nights\",\r\n      \"value\": \"1 night\"\r\n    },\r\n    {\r\n      \"name\": \"Max number of nights\",\r\n      \"value\": \"90 nights\"\r\n    }\r\n  ],\r\n  \"stayUnAvailability\": [\r\n    {\r\n      \"UnAvaiableDate\": \"2023-12-16T14:59:41.514Z\"\r\n    }\r\n  ],\r\n  \"stayImages\": [\r\n    {\r\n      \"image\": \"https://images.pexels.com/photos/6129967/pexels-photo-6129967.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260\"\r\n    },\r\n    {\r\n      \"image\": \"https://images.pexels.com/photos/7163619/pexels-photo-7163619.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260\"\r\n    },\r\n    {\r\n      \"image\": \"https://images.pexels.com/photos/6527036/pexels-photo-6527036.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260\"\r\n    },\r\n    {\r\n      \"image\": \"https://images.pexels.com/photos/6969831/pexels-photo-6969831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260\"\r\n    }\r\n  ],\r\n  \"stayTags\": [\r\n    {\r\n      \"label\": \"Wooden house\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{stay_url}}/api/v1/stays/create-stay",
+							"host": [
+								"{{stay_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"stays",
+								"create-stay"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Stay",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{stay_url}}/api/v1/stays/:stayId/delete-stay",
+							"host": [
+								"{{stay_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"stays",
+								":stayId",
+								"delete-stay"
+							],
+							"variable": [
+								{
+									"key": "stayId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Stay",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"[TEST] Beach House in Collingwood\",\r\n    \"numberOfBeds\": 4,\r\n    \"numberOfGuests\": 4,\r\n    \"numberOfBathrooms\": 2,\r\n    \"numberOfBedrooms\": 2,\r\n    \"address\": \"Ho Chi Minh, VietNam\",\r\n    \"rating\": 4.8,\r\n    \"pricePerNight\": 120,\r\n    \"stayInformation\": \"<p><span>Providing lake views, The Symphony 9 Tam Coc in Ninh Binh provides accommodation, an outdoor swimming pool, a bar, a shared lounge, a garden and barbecue facilities. Complimentary WiFi is provided.</span>&nbsp;<br>    <br>    <span>There is a private bathroom with bidet in all units, along with a hairdryer and free toiletries.</span>&nbsp;<br>    <br>    <span>The Symphony 9 Tam Coc offers a terrace. Both a bicycle rental service and a car rental service are available at the accommodation, while cycling can be enjoyed nearby.</span></p>\",\r\n    \"serviceCharge\": 10,\r\n    \"hostId\": 1,\r\n    \"cancellationPolicy\": \"<p>Refund 50% of the booking value when customers cancel the room within 48 hours after successful booking and 14 days before the check-in time.</p> <br> <p>Then, cancel the room 14 days before the check-in time, get a 50% refund of the total amount paid (minus the service fee).</p>\",\r\n    \"checkInTime\": \"08:00 am - 12:00 am\",\r\n    \"checkOutTime\": \"02:00 pm - 04:00 pm\",\r\n    \"specialNotes\": \"<ul>    <li>        Ban and I will work together to keep the landscape and environment green and clean by not littering, not using stimulants and respecting people around.    </li>    <li>        Do not sing karaoke past 11:30    </li></ul>\",\r\n    \"stayAmenities\": [\r\n        {\r\n            \"amenityId\": 1,\r\n            \"stayId\": 1\r\n        },\r\n        {\r\n            \"amenityId\": 3,\r\n            \"stayId\": 1\r\n        }\r\n    ],\r\n    \"roomRates\": [\r\n        {\r\n            \"name\": \"Monday - Thursday\",\r\n            \"value\": \"199\",\r\n            \"stayId\": 1\r\n        },\r\n        {\r\n            \"name\": \"Friday - Sunday\",\r\n            \"value\": \"219\",\r\n            \"stayId\": 1\r\n        },\r\n        {\r\n            \"name\": \"Rent by month\",\r\n            \"value\": \"-8.34 %\",\r\n            \"stayId\": 1\r\n        },\r\n        {\r\n            \"name\": \"Minimum number of nights\",\r\n            \"value\": \"1 night\",\r\n            \"stayId\": 1\r\n        },\r\n        {\r\n            \"name\": \"Max number of nights\",\r\n            \"value\": \"90 nights\",\r\n            \"stayId\": 1\r\n        }\r\n    ],\r\n    \"stayUnAvailability\": [\r\n        {\r\n            \"stayId\": 1,\r\n            \"unAvaiableDate\": \"2023-12-16T14:59:41.514\"\r\n        }\r\n    ],\r\n    \"stayImages\": [\r\n        {\r\n            \"image\": \"https://images.pexels.com/photos/6129967/pexels-photo-6129967.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260\",\r\n            \"stayId\": 1\r\n        },\r\n        {\r\n            \"image\": \"https://images.pexels.com/photos/6527036/pexels-photo-6527036.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260\",\r\n            \"stayId\": 1\r\n        },\r\n        {\r\n            \"image\": \"https://images.pexels.com/photos/6969831/pexels-photo-6969831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260\",\r\n            \"stayId\": 1\r\n        }\r\n    ],\r\n    \"stayReviews\": [],\r\n    \"stayTags\": [\r\n        {\r\n            \"label\": \"Wooden house\",\r\n            \"stayId\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{stay_url}}/api/v1/stays/update-stay",
+							"host": [
+								"{{stay_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"stays",
+								"update-stay"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Stay",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{stay_url}}/api/v1/search",
+							"host": [
+								"{{stay_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"search"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{accessToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"const postRequest = {",
+							"  url: 'https://localhost:8000/connect/token',",
+							"  method: 'POST',",
+							"  body: {",
+							"    mode: 'urlencoded',",
+							"    urlencoded : [",
+							"        { key: 'client_id', value: pm.environment.get(\"client_id\")},",
+							"        { key: 'client_secret', value: pm.environment.get(\"client_secret\")},",
+							"        { key: 'grant_type', value: pm.environment.get(\"grant_type\")},",
+							"        { key: 'scope', value: pm.environment.get(\"scope\")},",
+							"    ]",
+							"  }",
+							"};",
+							"",
+							"pm.sendRequest(postRequest, function (err, response) {",
+							"    pm.environment.set(\"accessToken\", response.json().access_token);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Booking",
+			"item": []
+		},
+		{
+			"name": "Identity",
+			"item": [
+				{
+					"name": "Get Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const res = pm.response.json(); \r",
+									"\r",
+									"console.log(res);\r",
+									"\r",
+									"pm.environment.set(\"accessToken\", res.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{client_secret}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "{{grant_type}}",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "{{scope}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{identity_url}}/connect/token",
+							"host": [
+								"{{identity_url}}"
+							],
+							"path": [
+								"connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Amenity",
+			"item": [
+				{
+					"name": "Get Amenities",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{stay_url}}/api/v1.0/amenities",
+							"host": [
+								"{{stay_url}}"
+							],
+							"path": [
+								"api",
+								"v1.0",
+								"amenities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Amenity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{stay_url}}/api/v1.0/amenities/:amenityId",
+							"host": [
+								"{{stay_url}}"
+							],
+							"path": [
+								"api",
+								"v1.0",
+								"amenities",
+								":amenityId"
+							],
+							"variable": [
+								{
+									"key": "amenityId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Amenity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"shopping\",\r\n  \"icon\": \"la la-shop\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{stay_url}}/api/v1.0/amenities/create-amenity",
+							"host": [
+								"{{stay_url}}"
+							],
+							"path": [
+								"api",
+								"v1.0",
+								"amenities",
+								"create-amenity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Amenity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 38,\r\n    \"name\": \"shopping area\",\r\n    \"icon\": \"la1 la-shop\",\r\n    \"isDeleted\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{stay_url}}/api/v1.0/amenities/update-amenity",
+							"host": [
+								"{{stay_url}}"
+							],
+							"path": [
+								"api",
+								"v1.0",
+								"amenities",
+								"update-amenity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Amenity",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{stay_url}}/api/v1.0/amenities/:amenityId/delete-amenity",
+							"host": [
+								"{{stay_url}}"
+							],
+							"path": [
+								"api",
+								"v1.0",
+								"amenities",
+								":amenityId",
+								"delete-amenity"
+							],
+							"variable": [
+								{
+									"key": "amenityId",
+									"value": "38"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{accessToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"const postRequest = {",
+							"  url: 'https://localhost:8000/connect/token',",
+							"  method: 'POST',",
+							"  body: {",
+							"    mode: 'urlencoded',",
+							"    urlencoded : [",
+							"        { key: 'client_id', value: pm.environment.get(\"client_id\")},",
+							"        { key: 'client_secret', value: pm.environment.get(\"client_secret\")},",
+							"        { key: 'grant_type', value: pm.environment.get(\"grant_type\")},",
+							"        { key: 'scope', value: pm.environment.get(\"scope\")},",
+							"    ]",
+							"  }",
+							"};",
+							"",
+							"pm.sendRequest(postRequest, function (err, response) {",
+							"    pm.environment.set(\"accessToken\", response.json().access_token);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Promotions",
+			"item": [
+				{
+					"name": "Get Promotions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{promotion_url}}/api/v1.0/promotions",
+							"host": [
+								"{{promotion_url}}"
+							],
+							"path": [
+								"api",
+								"v1.0",
+								"promotions"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Black Friday",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{promotion_url}}/api/v1.0/promotions",
+									"host": [
+										"{{promotion_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"promotions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jan 2024 15:01:00 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "api-supported-versions",
+									"value": "1.0"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Black Friday 20% Off\",\n        \"description\": \"Discount 20% all room for Black Friday\",\n        \"percentageDiscount\": 20,\n        \"priceDiscount\": 0,\n        \"fromDate\": \"2024-01-21T17:00:00Z\",\n        \"toDate\": \"2024-01-24T17:00:00Z\",\n        \"discountType\": 1,\n        \"stayPromotions\": [\n            {\n                \"promotionId\": 1,\n                \"stayId\": 1\n            }\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Promotion Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{promotion_url}}/api/v1.0/promotions/:promotionId",
+							"host": [
+								"{{promotion_url}}"
+							],
+							"path": [
+								"api",
+								"v1.0",
+								"promotions",
+								":promotionId"
+							],
+							"variable": [
+								{
+									"key": "promotionId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Black Friday",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{promotion_url}}/api/v1.0/promotions/:promotionId",
+									"host": [
+										"{{promotion_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"promotions",
+										":promotionId"
+									],
+									"variable": [
+										{
+											"key": "promotionId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jan 2024 15:03:09 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "api-supported-versions",
+									"value": "1.0"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"Black Friday 20% Off\",\n    \"description\": \"Discount 20% all room for Black Friday\",\n    \"percentageDiscount\": 20,\n    \"priceDiscount\": 0,\n    \"fromDate\": \"2024-01-21T17:00:00Z\",\n    \"toDate\": \"2024-01-24T17:00:00Z\",\n    \"discountType\": 1,\n    \"stayPromotions\": [\n        {\n            \"promotionId\": 1,\n            \"stayId\": 1\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Promotion",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{promotion_url}}/api/v1.0/promotions/:promotionId/delete-promotion",
+							"host": [
+								"{{promotion_url}}"
+							],
+							"path": [
+								"api",
+								"v1.0",
+								"promotions",
+								":promotionId",
+								"delete-promotion"
+							],
+							"variable": [
+								{
+									"key": "promotionId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Black Friday",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{promotion_url}}/api/v1.0/promotions/:promotionId/delete-promotion",
+									"host": [
+										"{{promotion_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"promotions",
+										":promotionId",
+										"delete-promotion"
+									],
+									"variable": [
+										{
+											"key": "promotionId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jan 2024 15:03:57 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "api-supported-versions",
+									"value": "1.0"
+								}
+							],
+							"cookie": [],
+							"body": "true"
+						}
+					]
+				},
+				{
+					"name": "Create Promotion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Cyber Monday 10$ Off\",\r\n    \"description\": \"Discount 10$ all rooms for Cycber Monday\",\r\n    \"percentageDiscount\": 0,\r\n    \"priceDiscount\": 10,\r\n    \"fromDate\": \"2024-01-22T17:00:00Z\",\r\n    \"toDate\": \"2024-01-28T17:00:00Z\",\r\n    \"discountType\": 0,\r\n    \"stayPromotions\": [\r\n        {\r\n            \"stayId\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{promotion_url}}/api/v1.0/promotions/create-promotion",
+							"host": [
+								"{{promotion_url}}"
+							],
+							"path": [
+								"api",
+								"v1.0",
+								"promotions",
+								"create-promotion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Promotion",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Id\": 2,\r\n    \"name\": \"Cyber Monday 20$ Off TEST\",\r\n    \"description\": \"Discount 20$ all rooms for Cycber Monday\",\r\n    \"percentageDiscount\": 0,\r\n    \"priceDiscount\": 20,\r\n    \"fromDate\": \"2024-01-22T17:00:00Z\",\r\n    \"toDate\": \"2024-01-28T17:00:00Z\",\r\n    \"discountType\": 0,\r\n    \"stayPromotions\": [\r\n        {\r\n            \"PromotionId\": 2,\r\n            \"stayId\": 2\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{promotion_url}}/api/v1.0/promotions/update-promotion",
+							"host": [
+								"{{promotion_url}}"
+							],
+							"path": [
+								"api",
+								"v1.0",
+								"promotions",
+								"update-promotion"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{accessToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const postRequest = {",
+					"  url: 'https://localhost:8000/connect/token',",
+					"  method: 'POST',",
+					"  body: {",
+					"    mode: 'urlencoded',",
+					"    urlencoded : [",
+					"        { key: 'client_id', value: pm.environment.get(\"client_id\")},",
+					"        { key: 'client_secret', value: pm.environment.get(\"client_secret\")},",
+					"        { key: 'grant_type', value: pm.environment.get(\"grant_type\")},",
+					"        { key: 'scope', value: pm.environment.get(\"scope\")},",
+					"    ]",
+					"  }",
+					"};",
+					"",
+					"pm.sendRequest(postRequest, function (err, response) {",
+					"    pm.environment.set(\"accessToken\", response.json().access_token);",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
