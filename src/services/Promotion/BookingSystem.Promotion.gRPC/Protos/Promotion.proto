@@ -4,7 +4,7 @@ option csharp_namespace = "BookingSystem.Promotion.gRPC.Protos";
 
 service PromotionService {
   // Sends a greeting
-  rpc GetPromotions (GetPromotionsQuery) returns (stream GetPromotionResponse);
+  rpc GetPromotions (GetPromotionsQuery) returns (GetPromotionResponse);
 }
 
 message GetPromotionsQuery {
