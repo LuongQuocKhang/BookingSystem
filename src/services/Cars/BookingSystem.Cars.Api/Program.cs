@@ -3,6 +3,9 @@ using BookingSystem.Cars.Api.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
+using BookingSystem.Cars.Application;
+using BookingSystem.Cars.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -39,6 +42,8 @@ app.UseUrlRewrite();
 
 IApiVersionDescriptionProvider apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 app.UseOpenApi(builder.Configuration, apiVersionDescriptionProvider);
+
+app.AddGrapQL();
 
 app.UseAuthentication();
 

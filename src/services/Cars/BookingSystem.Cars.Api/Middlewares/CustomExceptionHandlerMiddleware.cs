@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using BookingSystem.Booking.Application.Exceptions;
+using BookingSystem.Cars.Application.Exceptions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
