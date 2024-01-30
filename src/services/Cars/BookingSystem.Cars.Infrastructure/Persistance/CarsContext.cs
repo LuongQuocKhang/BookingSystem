@@ -2,6 +2,6 @@
 
 namespace BookingSystem.Cars.Infrastructure.Persistance;
 
-public class CarsContext : DbContext
+public class CarsContext(DbContextOptions<CarsContext> options) : DbContext(options)
 {
 }

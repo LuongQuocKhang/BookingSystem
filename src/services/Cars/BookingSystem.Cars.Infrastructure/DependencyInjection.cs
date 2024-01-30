@@ -15,7 +15,6 @@ public static class DependencyInjection
             options => options.UseSqlServer(configuration.GetConnectionString("BookingSystem")));
 
         services.AddGraphQLServer()
-            .RegisterDbContext<CarsContext>()
             .InitializeOnStartup()
             .AddQueryType<Query>();
 
