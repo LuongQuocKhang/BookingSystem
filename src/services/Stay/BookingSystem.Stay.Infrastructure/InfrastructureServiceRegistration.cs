@@ -1,5 +1,7 @@
-﻿using BookingSystem.Stay.Application.Contracts.Persistance;
+﻿using BookingSystem.Promotion.gRPC.Protos;
+using BookingSystem.Stay.Application.Contracts.Persistance;
 using BookingSystem.Stay.Infrastructure.Abstractions;
+using BookingSystem.Stay.Infrastructure.GrpcServices;
 using BookingSystem.Stay.Infrastructure.Persistance;
 using BookingSystem.Stay.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +16,13 @@ public static class InfrastructureServiceRegistration
     {
         services.AddDbContext<StayContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("BookingSystem")));
+
+        services.AddGrpcClient<PromotionService.PromotionServiceClient>(config =>
+        {
+            config.Address = new Uri(configuration["ApiEndPoint:PromotionGrpcService"] ?? "");
+        });
+
+        services.AddScoped<PromotionGrpcService>();
 
         services.AddTransient<IStayDbContext, StayContext>();
 

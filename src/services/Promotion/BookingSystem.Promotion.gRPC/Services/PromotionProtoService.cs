@@ -5,7 +5,7 @@ using BookingSystem.Promotion.Infrastructure.Abstractions;
 using Grpc.Core;
 
 namespace BookingSystem.Promotion.gRPC.Services;
-public class GrpcPromotionService(IPromotionRepository promotionRepository, IMapper mapper) 
+public class PromotionProtoService(IPromotionRepository promotionRepository, IMapper mapper) 
     : PromotionService.PromotionServiceBase
 {
     private readonly IPromotionRepository _promotionRepository = promotionRepository ?? throw new ArgumentNullException(nameof(promotionRepository));
@@ -17,6 +17,11 @@ public class GrpcPromotionService(IPromotionRepository promotionRepository, IMap
 
         IReadOnlyCollection<PromotionEntity> promotions = await _promotionRepository.GetPromotionsByStay(request.StayId, CancellationToken.None)
             .ConfigureAwait(false);
+
+        if(promotions.Count == 0)
+        {
+            throw new RpcException(new Status(StatusCode.NotFound, $"Discount for stay: {request.StayId} not found."));
+        }
 
         IReadOnlyCollection<PromotionViewModel> promotionViews = _mapper.Map<IReadOnlyCollection<PromotionViewModel>>(promotions);
 

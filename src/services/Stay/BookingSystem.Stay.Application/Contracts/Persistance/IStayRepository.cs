@@ -11,9 +11,9 @@ public interface IStayRepository
 
     Task<bool> DeleteStay(int id, CancellationToken cancellationToken = default);
 
-    Task<IReadOnlyCollection<StayEntity>> GetStays();
+    Task<IReadOnlyCollection<StayEntity>> GetStays(CancellationToken cancellationToken = default);
 
-    Task<StayEntity?> GetStayById(int id);
+    Task<StayEntity?> GetStayById(int id, CancellationToken cancellationToken = default);
 
     Task<bool> ReviewStay(StayReviewEntity model, CancellationToken cancellationToken = default);
 
