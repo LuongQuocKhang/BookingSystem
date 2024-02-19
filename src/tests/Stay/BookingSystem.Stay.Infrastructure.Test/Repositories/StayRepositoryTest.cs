@@ -3,6 +3,7 @@ using BookingSystem.Promotion.Domain.Entities;
 using BookingSystem.Stay.Application.Contracts.Persistance;
 using BookingSystem.Stay.Domain.Entities;
 using BookingSystem.Stay.Infrastructure.Abstractions;
+using BookingSystem.Stay.Infrastructure.GrpcServices;
 using BookingSystem.Stay.Infrastructure.Persistance;
 using BookingSystem.Stay.Infrastructure.Repositories;
 using Castle.Core.Logging;
@@ -17,6 +18,7 @@ public class StayRepositoryTest
 {
     private readonly Mock<IStayDbContext> _mockContext = new Mock<IStayDbContext>();
     private readonly Mock<IMapper> _mapper = new Mock<IMapper>();
+    private readonly Mock<IPromotionGrpcService> _promotionGrpcService = new Mock<IPromotionGrpcService>();
     private readonly Mock<ILogger<StayRepository>> _logger = new Mock<ILogger<StayRepository>>();
 
     private static DbSet<T> MockDbSet<T>(IQueryable<T> data) where T : class
@@ -41,6 +43,17 @@ public class StayRepositoryTest
     [Fact]
     public async Task GetStays_SouldReturnListOfStays()
     {
+        _promotionGrpcService.Setup(x => x.GetPromotions(It.IsAny<int>()))
+            .ReturnsAsync(new List<Promotion.gRPC.Protos.PromotionViewModel>()
+            {
+                new Promotion.gRPC.Protos.PromotionViewModel()
+                {
+                    Description = "description",
+                    DiscountType = 1,
+                    Id = 1,
+                }
+            });
+
         IQueryable<StayEntity> stays = new List<StayEntity>()
         {
             new StayEntity()
@@ -58,7 +71,7 @@ public class StayRepositoryTest
 
         StayRepository stayRepository = new StayRepository(_mockContext.Object,
             _mapper.Object,
-            _logger.Object);
+            _logger.Object, _promotionGrpcService.Object);
 
         IReadOnlyCollection<StayEntity> stayViews = await stayRepository.GetStays().ConfigureAwait(false);
 
@@ -70,10 +83,21 @@ public class StayRepositoryTest
     [Fact]
     public async Task GetStayById_ValidStayId_ShouldReturnStayDetail()
     {
+        _promotionGrpcService.Setup(x => x.GetPromotions(It.IsAny<int>()))
+            .ReturnsAsync(new List<Promotion.gRPC.Protos.PromotionViewModel>()
+            {
+                new Promotion.gRPC.Protos.PromotionViewModel()
+                {
+                    Description = "description",
+                    DiscountType = 1,
+                    Id = 1,
+                }
+            });
+
         // Arrange
         int stayId = 1;
 
-        var stayService = new StayRepository(_mockContext.Object, _mapper.Object, _logger.Object);
+        var stayService = new StayRepository(_mockContext.Object, _mapper.Object, _logger.Object, _promotionGrpcService.Object);
 
         IQueryable<StayEntity> stays = new List<StayEntity>
         {
@@ -98,7 +122,7 @@ public class StayRepositoryTest
     {
         int stayId = 2;
         var contextMock = new Mock<IStayDbContext>();
-        var stayService = new StayRepository(contextMock.Object, _mapper.Object, _logger.Object);
+        var stayService = new StayRepository(contextMock.Object, _mapper.Object, _logger.Object, _promotionGrpcService.Object);
 
         IQueryable<StayEntity> stays = new List<StayEntity>
         {
@@ -121,7 +145,7 @@ public class StayRepositoryTest
     {
         int stayId = 0;
         
-        var stayService = new StayRepository(_mockContext.Object, _mapper.Object, _logger.Object);
+        var stayService = new StayRepository(_mockContext.Object, _mapper.Object, _logger.Object, _promotionGrpcService.Object);
 
         IQueryable<StayEntity> stays = new List<StayEntity>
         {
@@ -142,7 +166,7 @@ public class StayRepositoryTest
     [Fact]
     public async Task CreateStay_validInput_ShouldReturnNewStayId()
     {
-        var stayService = new StayRepository(_mockContext.Object, _mapper.Object, _logger.Object);
+        var stayService = new StayRepository(_mockContext.Object, _mapper.Object, _logger.Object, _promotionGrpcService.Object);
 
         StayEntity stay = new StayEntity()
         {
@@ -185,7 +209,18 @@ public class StayRepositoryTest
     [Fact]
     public async Task UpdateStay_validInput_ShouldReturnTrue()
     {
-        var stayService = new StayRepository(_mockContext.Object, _mapper.Object, _logger.Object);
+        _promotionGrpcService.Setup(x => x.GetPromotions(It.IsAny<int>()))
+            .ReturnsAsync(new List<Promotion.gRPC.Protos.PromotionViewModel>()
+            {
+                new Promotion.gRPC.Protos.PromotionViewModel()
+                {
+                    Description = "description",
+                    DiscountType = 1,
+                    Id = 1,
+                }
+            });
+
+        var stayService = new StayRepository(_mockContext.Object, _mapper.Object, _logger.Object, _promotionGrpcService.Object);
 
         StayEntity stay = new StayEntity()
         {
@@ -236,7 +271,7 @@ public class StayRepositoryTest
     [Fact]
     public async Task UpdateStay_InValidInput_ShouldReturnFalse()
     {
-        var stayService = new StayRepository(_mockContext.Object, _mapper.Object, _logger.Object);
+        var stayService = new StayRepository(_mockContext.Object, _mapper.Object, _logger.Object, _promotionGrpcService.Object);
 
         StayEntity stay = new StayEntity()
         {
@@ -285,7 +320,7 @@ public class StayRepositoryTest
     [Fact]
     public async Task ReviewStay_validInput_ShouldReturnTrue()
     {
-        var stayService = new StayRepository(_mockContext.Object, _mapper.Object, _logger.Object);
+        var stayService = new StayRepository(_mockContext.Object, _mapper.Object, _logger.Object, _promotionGrpcService.Object);
 
         var review = new StayReviewEntity()
         {
@@ -306,7 +341,7 @@ public class StayRepositoryTest
     [Fact]
     public async Task SaveStayToWishList_validInput_ShouldReturnTrue()
     {
-        var stayService = new StayRepository(_mockContext.Object, _mapper.Object, _logger.Object);
+        var stayService = new StayRepository(_mockContext.Object, _mapper.Object, _logger.Object, _promotionGrpcService.Object);
 
         var wish = new StayWishListEntity()
         {
@@ -333,7 +368,7 @@ public class StayRepositoryTest
             1, 2
         };
 
-        var stayService = new StayRepository(_mockContext.Object, _mapper.Object, _logger.Object);
+        var stayService = new StayRepository(_mockContext.Object, _mapper.Object, _logger.Object, _promotionGrpcService.Object);
 
         var wish = new StayWishListEntity()
         {
@@ -354,7 +389,7 @@ public class StayRepositoryTest
     {
         int stayId = 1, tripId = 1;
 
-        var stayService = new StayRepository(_mockContext.Object, _mapper.Object, _logger.Object);
+        var stayService = new StayRepository(_mockContext.Object, _mapper.Object, _logger.Object, _promotionGrpcService.Object);
 
         var wish = new StayWishListEntity()
         {

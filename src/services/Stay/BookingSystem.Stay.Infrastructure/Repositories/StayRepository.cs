@@ -12,7 +12,10 @@ using System.Collections.ObjectModel;
 
 namespace BookingSystem.Stay.Infrastructure.Repositories;
 
-public class StayRepository(IStayDbContext context, IMapper mapper, ILogger<StayRepository> logger, PromotionGrpcService promotionGrpcService)
+public class StayRepository(IStayDbContext context, 
+    IMapper mapper, 
+    ILogger<StayRepository> logger,
+    IPromotionGrpcService promotionGrpcService)
     : IStayRepository
 {
     private readonly IStayDbContext _context = context;
@@ -21,7 +24,7 @@ public class StayRepository(IStayDbContext context, IMapper mapper, ILogger<Stay
 
     private readonly ILogger<StayRepository> _logger = logger;
 
-    private readonly PromotionGrpcService _promotionGrpcService = promotionGrpcService;
+    private readonly IPromotionGrpcService _promotionGrpcService = promotionGrpcService;
 
     public Task<bool> AddStayToTrip(int stayId, int tripId, CancellationToken cancellationToken = default)
     {

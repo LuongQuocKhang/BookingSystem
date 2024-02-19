@@ -22,7 +22,7 @@ public static class InfrastructureServiceRegistration
             config.Address = new Uri(configuration["ApiEndPoint:PromotionGrpcService"] ?? "");
         });
 
-        services.AddScoped<PromotionGrpcService>();
+        services.AddTransient<IPromotionGrpcService, PromotionGrpcService>();
 
         services.AddTransient<IStayDbContext, StayContext>();
 
