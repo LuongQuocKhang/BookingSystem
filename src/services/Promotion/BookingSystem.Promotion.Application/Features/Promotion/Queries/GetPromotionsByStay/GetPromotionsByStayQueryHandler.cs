@@ -22,4 +22,5 @@ public class GetPromotionsByStayQueryHandler(IPromotionRepository promotionRepos
 
         return promotionViews;
     }
+
 }

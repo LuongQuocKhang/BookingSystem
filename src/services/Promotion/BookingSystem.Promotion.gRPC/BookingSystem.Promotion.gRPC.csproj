@@ -11,10 +11,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.57.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BookingSystem.Promotion.Application\BookingSystem.Promotion.Application.csproj" />
     <ProjectReference Include="..\BookingSystem.Promotion.Domain\BookingSystem.Promotion.Domain.csproj" />
     <ProjectReference Include="..\BookingSystem.Promotion.Infrastructure\BookingSystem.Promotion.Infrastructure.csproj" />
   </ItemGroup>

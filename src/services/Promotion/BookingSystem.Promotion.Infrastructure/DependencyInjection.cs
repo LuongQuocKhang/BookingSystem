@@ -14,6 +14,8 @@ public static class DependencyInjection
         services.AddDbContext<PromotionContext>(options =>
                 options.UseNpgsql(configuration.GetConnectionString("BookingSystem")));
 
+        services.AddTransient<IPromotionDbContext, PromotionContext>();
+
         services.AddTransient<IPromotionRepository, PromotionRepository>();
         return services;
     }

@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.23.1" />
+    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.57.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.57.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
@@ -16,6 +22,12 @@
   <ItemGroup>
     <ProjectReference Include="..\BookingSystem.Stay.Application\BookingSystem.Stay.Application.csproj" />
     <ProjectReference Include="..\BookingSystem.Stay.Domain\BookingSystem.Stay.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\..\Promotion\BookingSystem.Promotion.gRPC\Protos\Promotion.proto" GrpcServices="Client">
+      <Link>Protos\Promotion.proto</Link>
+    </Protobuf>
   </ItemGroup>
 
 </Project>

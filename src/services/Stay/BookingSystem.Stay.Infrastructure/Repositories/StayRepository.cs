@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using BookingSystem.Stay.Application.Contracts.Persistance;
+using BookingSystem.Stay.Application.Exceptions;
 using BookingSystem.Stay.Domain.Entities;
 using BookingSystem.Stay.Infrastructure.Abstractions;
+using BookingSystem.Stay.Infrastructure.Constant;
+using BookingSystem.Stay.Infrastructure.GrpcServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Logging;
@@ -9,7 +12,10 @@ using System.Collections.ObjectModel;
 
 namespace BookingSystem.Stay.Infrastructure.Repositories;
 
-public class StayRepository(IStayDbContext context, IMapper mapper, ILogger<StayRepository> logger) 
+public class StayRepository(IStayDbContext context, 
+    IMapper mapper, 
+    ILogger<StayRepository> logger,
+    IPromotionGrpcService promotionGrpcService)
     : IStayRepository
 {
     private readonly IStayDbContext _context = context;
@@ -17,6 +23,8 @@ public class StayRepository(IStayDbContext context, IMapper mapper, ILogger<Stay
     private readonly IMapper _mapper = mapper;
 
     private readonly ILogger<StayRepository> _logger = logger;
+
+    private readonly IPromotionGrpcService _promotionGrpcService = promotionGrpcService;
 
     public Task<bool> AddStayToTrip(int stayId, int tripId, CancellationToken cancellationToken = default)
     {
@@ -58,14 +66,14 @@ public class StayRepository(IStayDbContext context, IMapper mapper, ILogger<Stay
 
             return true;
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             _logger.LogError(ex.Message, ex);
             return false;
         }
     }
 
-    public async Task<IReadOnlyCollection<StayEntity>> GetStays()
+    public async Task<IReadOnlyCollection<StayEntity>> GetStays(CancellationToken cancellationToken = default)
     {
         List<StayEntity> dbStays = await _context.Stays
             .AsNoTracking()
@@ -91,17 +99,22 @@ public class StayRepository(IStayDbContext context, IMapper mapper, ILogger<Stay
                 StayImages = x.StayImages,
                 StayTags = x.StayTags
             })
-            .ToListAsync()
+            .ToListAsync(cancellationToken: cancellationToken)
             .ConfigureAwait(false);
+
+        foreach (StayEntity stay in dbStays)
+        {
+            await GetPromotionForStay(stay, cancellationToken).ConfigureAwait(false);
+        }
 
         var stayViews = new ReadOnlyCollection<StayEntity>(dbStays);
 
         return stayViews;
     }
 
-    public async Task<StayEntity?> GetStayById(int id)
+    public async Task<StayEntity?> GetStayById(int id, CancellationToken cancellationToken = default)
     {
-        StayEntity? stays = _context.Stays
+        StayEntity? stay = _context.Stays
             .AsNoTracking()
             .Include(x => x.StayTags)
             .Include(x => x.StayAmenities!)
@@ -113,9 +126,11 @@ public class StayRepository(IStayDbContext context, IMapper mapper, ILogger<Stay
             .Include(x => x.StayTags)
             .Include(x => x.Host)
             .FirstOrDefault(x => x.Id == id
-                && !x.IsDeleted);
+                && !x.IsDeleted) ?? throw new NotFoundException($"Stay : {id} not found.");
 
-        return await Task.FromResult(stays).ConfigureAwait(false);
+        await GetPromotionForStay(stay, cancellationToken).ConfigureAwait(false);
+
+        return await Task.FromResult(stay).ConfigureAwait(false);
     }
 
     public async Task<bool> ReviewStay(StayReviewEntity model, CancellationToken cancellationToken = default)
@@ -157,7 +172,7 @@ public class StayRepository(IStayDbContext context, IMapper mapper, ILogger<Stay
 
     public async Task<bool> UpdateStay(StayEntity model, CancellationToken cancellationToken = default)
     {
-       _context.BeginTransaction();
+        _context.BeginTransaction();
 
         try
         {
@@ -245,6 +260,38 @@ public class StayRepository(IStayDbContext context, IMapper mapper, ILogger<Stay
             _context.RollbackTransaction();
             _logger.LogError($"Error When Update Stay : {ex.Message}", ex);
             return false;
+        }
+    }
+
+    private async Task GetPromotionForStay(StayEntity stay, CancellationToken cancellationToken)
+    {
+        var promotions = await _promotionGrpcService.GetPromotions(stay.Id).ConfigureAwait(false);
+
+        foreach (var promotion in promotions)
+        {
+            switch (promotion.DiscountType)
+            {
+                case (int)DiscountType.PRICE:
+                    {
+                        if (stay.PricePerNight - promotion.PriceDiscount > 0)
+                        {
+                            stay.PricePerNight -= promotion.PriceDiscount;
+                        }
+
+                        break;
+                    }
+                case (int)DiscountType.PERCENTAGE:
+                    {
+                        double discountPrice = stay.PricePerNight * (promotion.PercentageDiscount / 100);
+
+                        if (stay.PricePerNight - discountPrice > 0)
+                        {
+                            stay.PricePerNight -= discountPrice;
+                        }
+
+                        break;
+                    }
+            }
         }
     }
 }
