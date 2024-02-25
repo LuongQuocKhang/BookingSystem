@@ -15,7 +15,7 @@ public class GetStaysQueryHandler(IStayRepository stayRepository, IMapper mapper
 
     public async Task<IReadOnlyCollection<StayViewModel>> Handle(GetStaysQuery request, CancellationToken cancellationToken)
     {
-        IReadOnlyCollection<StayEntity> stays = await _stayRepository.GetStays()
+        IReadOnlyCollection<StayEntity> stays = await _stayRepository.GetStays(request.PazeIndex, request.PazeIndex, request.OrderBy, cancellationToken)
             .ConfigureAwait(false);
 
         return _mapper.Map<IReadOnlyCollection<StayViewModel>>(stays);

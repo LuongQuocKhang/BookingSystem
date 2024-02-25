@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BookingSystem.Promotion.Application.Constant;
 using BookingSystem.Promotion.Domain.Entities;
 using BookingSystem.Promotion.Infrastructure.Abstractions;
 using BookingSystem.Promotion.Infrastructure.Repositories;
@@ -38,7 +39,7 @@ public class PromotionRepositoryTest
     {
         IQueryable<PromotionEntity> stays = new List<PromotionEntity>()
         {
-            new PromotionEntity()
+            new()
             {
                 Id = 1,
                 Name = "TEST Promotion"
@@ -51,7 +52,11 @@ public class PromotionRepositoryTest
             _mapper.Object,
             _logger.Object);
 
-        IReadOnlyCollection<PromotionEntity>? promotions= await stayRepository.GetPromotions(It.IsAny<CancellationToken>()).ConfigureAwait(false);
+        IReadOnlyCollection<PromotionEntity>? promotions = await stayRepository.GetPromotions( 
+            pageIndex: 0,
+            pageSize: 10,
+            orderBy: OrderBy.Descending,
+            It.IsAny<CancellationToken>()).ConfigureAwait(false);
 
         Assert.NotNull(promotions);
         Assert.Single(promotions);
@@ -64,7 +69,7 @@ public class PromotionRepositoryTest
 
         IQueryable<PromotionEntity> stays = new List<PromotionEntity>()
         {
-            new PromotionEntity()
+            new()
             {
                 Id = 1,
                 Name = "TEST Promotion"
@@ -90,7 +95,7 @@ public class PromotionRepositoryTest
 
         IQueryable<PromotionEntity> stays = new List<PromotionEntity>()
         {
-            new PromotionEntity()
+            new()
             {
                 Id = 1,
                 Name = "TEST Promotion"
@@ -99,7 +104,7 @@ public class PromotionRepositoryTest
 
         _mockContext.Setup(c => c.Promotions).Returns(MockDbSet(stays));
         _mockContext.Setup(c => c.StayPromotions).Returns(MockDbSet(new List<StayPromotionEntity>() { 
-            new StayPromotionEntity()
+            new()
             {
                 StayId = 1
             }
@@ -125,7 +130,7 @@ public class PromotionRepositoryTest
 
         IQueryable<PromotionEntity> stays = new List<PromotionEntity>()
         {
-            new PromotionEntity()
+            new()
             {
                 Id = 1,
                 Name = "TEST Promotion"

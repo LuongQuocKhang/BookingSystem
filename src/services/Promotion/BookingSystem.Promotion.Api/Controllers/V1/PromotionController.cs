@@ -1,4 +1,5 @@
 ﻿#region Commands, queries
+using BookingSystem.Promotion.Application.Constant;
 using BookingSystem.Promotion.Application.Features.Promotion.Commands.CreatePromotion;
 using BookingSystem.Promotion.Application.Features.Promotion.Commands.DeletePromotion;
 using BookingSystem.Promotion.Application.Features.Promotion.Commands.UpdatePromotion;
@@ -37,9 +38,14 @@ public class PromotionController(IMediator mediator, ILogger<PromotionController
     /// <response code="500">This response will be returned if there is an error in the system that prevents the purchase from being completed.</response>
     [HttpGet]
     [ProducesResponseType(typeof(IReadOnlyCollection<PromotionViewModel>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IReadOnlyCollection<PromotionViewModel>>> GetPromotions()
+    public async Task<ActionResult<IReadOnlyCollection<PromotionViewModel>>> GetPromotions(int pageIndex = 0, int pageSize = 10, OrderBy orderBy = OrderBy.Descending)
     {
-        IReadOnlyCollection<PromotionViewModel> result = await _mediator.Send(new GetPromotionsQuery());
+        IReadOnlyCollection<PromotionViewModel> result = await _mediator.Send(new GetPromotionsQuery()
+        {
+            PazeIndex = pageIndex,
+            PazeSize = pageSize,
+            OrderBy = orderBy
+        });
         return Ok(result);
     }
 

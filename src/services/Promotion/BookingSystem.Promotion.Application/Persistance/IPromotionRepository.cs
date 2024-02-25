@@ -1,6 +1,7 @@
 ﻿using BookingSystem.Promotion.Domain.Entities;
+using BookingSystem.Promotion.Application.Constant;
 
-namespace BookingSystem.Promotion.Infrastructure.Abstractions;
+namespace BookingSystem.Promotion.Application.Abstractions;
 
 /// <summary>
 /// Promotion Repository
@@ -20,7 +21,10 @@ public interface IPromotionRepository
     /// </summary>
     /// <param name="cancellationToken">Optional cancellation token</param>
     /// <returns>A task that represents the send operation. The task result contains list of promotions</returns>
-    Task<IReadOnlyCollection<PromotionEntity>> GetPromotions(CancellationToken cancellationToken = default);
+    Task<IReadOnlyCollection<PromotionEntity>> GetPromotions(int pageIndex = 0,
+        int pageSize = 10,
+        OrderBy orderBy = OrderBy.Descending,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Asynchronously get list of active promotions by stay

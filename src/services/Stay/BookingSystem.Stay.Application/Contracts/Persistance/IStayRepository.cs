@@ -1,4 +1,4 @@
-﻿using BookingSystem.Stay.Application.ViewModel;
+﻿using BookingSystem.Stay.Application.Constant;
 using BookingSystem.Stay.Domain.Entities;
 
 namespace BookingSystem.Stay.Application.Contracts.Persistance;
@@ -11,7 +11,7 @@ public interface IStayRepository
 
     Task<bool> DeleteStay(int id, CancellationToken cancellationToken = default);
 
-    Task<IReadOnlyCollection<StayEntity>> GetStays(CancellationToken cancellationToken = default);
+    Task<IReadOnlyCollection<StayEntity>> GetStays(int pageIndex = 0, int pageSize = 10, OrderBy orderBy = OrderBy.Descending, CancellationToken cancellationToken = default);
 
     Task<StayEntity?> GetStayById(int id, CancellationToken cancellationToken = default);
 

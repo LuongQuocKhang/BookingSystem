@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
+using BookingSystem.Promotion.Application.Abstractions;
+using BookingSystem.Promotion.Application.Constant;
 using BookingSystem.Promotion.Domain.Entities;
 using BookingSystem.Promotion.Infrastructure.Abstractions;
-using BookingSystem.Promotion.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Logging;
@@ -101,18 +102,47 @@ public class PromotionRepository(IPromotionDbContext context, IMapper mapper, IL
     /// <summary>
     /// Asynchronously get list of active promotions
     /// </summary>
+    /// <param name="pageIndex">Current page index</param>
+    /// <param name="pageSize">Number of return value</param>
+    /// <param name="orderBy">Order list result by Descending/Ascending</param>
     /// <param name="cancellationToken">Optional cancellation token</param>
     /// <returns>A task that represents the send operation. The task result contains list of promotions</returns>
-    public async Task<IReadOnlyCollection<PromotionEntity>> GetPromotions(CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyCollection<PromotionEntity>> GetPromotions(int pageIndex = 0,
+        int pageSize = 10,
+        OrderBy orderBy = OrderBy.Descending, 
+        CancellationToken cancellationToken = default)
     {
-        List<PromotionEntity> dbPromotions = await _context.Promotions
+        IQueryable<PromotionEntity> dbPromotions = _context.Promotions
             .AsNoTracking()
             .Include(x => x.StayPromotions)
-            .Where(x => !x.IsDeleted)
-            .ToListAsync(cancellationToken)
-            .ConfigureAwait(false);
+            .Where(x => !x.IsDeleted);
 
-        return new ReadOnlyCollection<PromotionEntity>(dbPromotions);
+        switch (orderBy)
+        {
+            case OrderBy.Ascending:
+                {
+                    dbPromotions = dbPromotions.OrderBy(x => x.CreatedDate);
+                    break;
+                }
+            case OrderBy.Descending:
+                {
+                    dbPromotions = dbPromotions.OrderByDescending(x => x.CreatedDate);
+                    break;
+                }
+            default:
+                {
+                    dbPromotions = dbPromotions.OrderByDescending(x => x.CreatedDate);
+                    break;
+                }
+        }
+
+        dbPromotions = dbPromotions.Skip(pageIndex * pageSize)
+            .Take(pageSize);
+
+        List<PromotionEntity> promotionEntities = await dbPromotions
+            .ToListAsync(cancellationToken).ConfigureAwait(false);
+
+        return new ReadOnlyCollection<PromotionEntity>(promotionEntities);
     }
 
     /// <summary>

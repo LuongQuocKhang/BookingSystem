@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BookingSystem.Promotion.Infrastructure.Abstractions;
+using BookingSystem.Promotion.Application.Abstractions;
 using MediatR;
 
 namespace BookingSystem.Promotion.Application.Features.Promotion.Commands.DeletePromotion;
