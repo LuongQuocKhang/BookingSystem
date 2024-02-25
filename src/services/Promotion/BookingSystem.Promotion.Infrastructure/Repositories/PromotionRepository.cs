@@ -129,6 +129,11 @@ public class PromotionRepository(IPromotionDbContext context, IMapper mapper, IL
                     dbPromotions = dbPromotions.OrderByDescending(x => x.CreatedDate);
                     break;
                 }
+            default:
+                {
+                    dbPromotions = dbPromotions.OrderByDescending(x => x.CreatedDate);
+                    break;
+                }
         }
 
         dbPromotions = dbPromotions.Skip(pageIndex * pageSize)

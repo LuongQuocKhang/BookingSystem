@@ -73,7 +73,10 @@ public class StayRepositoryTest
             _mapper.Object,
             _logger.Object, _promotionGrpcService.Object);
 
-        IReadOnlyCollection<StayEntity> stayViews = await stayRepository.GetStays().ConfigureAwait(false);
+        IReadOnlyCollection<StayEntity> stayViews = await stayRepository.GetStays(pageIndex: 0,
+            pageSize: 10,
+            orderBy: Application.Constant.OrderBy.Descending,
+            CancellationToken.None).ConfigureAwait(false);
 
         Assert.NotNull(stayViews);
 

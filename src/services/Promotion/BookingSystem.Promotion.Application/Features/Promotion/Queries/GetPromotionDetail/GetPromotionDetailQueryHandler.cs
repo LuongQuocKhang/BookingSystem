@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
+using BookingSystem.Promotion.Application.Abstractions;
+using BookingSystem.Promotion.Application.Exceptions;
 using BookingSystem.Promotion.Application.ViewModel;
 using BookingSystem.Promotion.Domain.Entities;
-using BookingSystem.Promotion.Infrastructure.Abstractions;
 using MediatR;
 
 namespace BookingSystem.Promotion.Application.Features.Promotion.Queries.GetPromotionDetail;
@@ -15,8 +16,8 @@ public class GetPromotionDetailQueryHandler(IPromotionRepository promotionReposi
 
     public async Task<PromotionViewModel> Handle(GetPromotionDetailQuery request, CancellationToken cancellationToken)
     {
-        PromotionEntity promotion = await _promotionRepository.GetPromotionDetail(request.PromotionId, cancellationToken)
-            .ConfigureAwait(false);
+        PromotionEntity? promotion = await _promotionRepository.GetPromotionDetail(request.PromotionId, cancellationToken)
+            .ConfigureAwait(false) ?? throw new NotFoundException();
 
         PromotionViewModel promotionViews = _mapper.Map<PromotionViewModel>(promotion);
 

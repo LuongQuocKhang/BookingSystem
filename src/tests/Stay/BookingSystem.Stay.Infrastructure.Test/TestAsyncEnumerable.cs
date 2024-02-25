@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace BookingSystem.Stay.Infrastructure.Test;
 
-public class TestAsyncEnumerable<T> : IAsyncEnumerable<T>, IQueryable<T>
+public class TestAsyncEnumerable<T> : IAsyncEnumerable<T>, IQueryable<T>, IOrderedQueryable<T>
 {
     private readonly IQueryable<T> _queryable;
 
