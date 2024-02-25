@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using BookingSystem.Promotion.Application.Abstractions;
 using BookingSystem.Promotion.Application.ViewModel;
 using BookingSystem.Promotion.Domain.Entities;
-using BookingSystem.Promotion.Infrastructure.Abstractions;
 using MediatR;
 
 namespace BookingSystem.Promotion.Application.Features.Promotion.Queries.GetPromotionDetail;

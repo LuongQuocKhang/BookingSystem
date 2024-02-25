@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using BookingSystem.Promotion.Application.Abstractions;
 using BookingSystem.Promotion.Domain.Entities;
 using BookingSystem.Promotion.gRPC.Protos;
-using BookingSystem.Promotion.Infrastructure.Abstractions;
 using Grpc.Core;
 
 namespace BookingSystem.Promotion.gRPC.Services;
