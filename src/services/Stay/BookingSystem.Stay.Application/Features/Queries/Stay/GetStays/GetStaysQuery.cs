@@ -1,4 +1,4 @@
-﻿using BookingSystem.Stay.Application.Message;
+﻿using BookingSystem.Stay.Application.Constant;
 using BookingSystem.Stay.Application.ViewModel;
 using MediatR;
 
@@ -9,6 +9,8 @@ public class GetStaysQuery : IRequest<IReadOnlyCollection<StayViewModel>>
     public int PazeIndex { get; set; }
 
     public int PazeSize { get; set; }
+
+    public OrderBy OrderBy { get; set; }
 
     //public string Key => nameof(GetStaysQuery);
 

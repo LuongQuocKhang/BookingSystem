@@ -17,6 +17,7 @@ using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using BookingSystem.Stay.Application.ViewModel;
 using BookingSystem.Stay.Application.Dto;
+using BookingSystem.Stay.Application.Constant;
 
 namespace BookingSystem.Stay.Api.Controllers.V1;
 
@@ -42,11 +43,12 @@ public class StaysController(ILogger<StaysController> logger, IMediator mediator
     /// <response code="500">This response will be returned if there is an error in the system that prevents the purchase from being completed.</response>
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<StayViewModel>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<StayViewModel>>> GetStays(int pageIndex = 0, int pageSize = 10)
+    public async Task<ActionResult<IEnumerable<StayViewModel>>> GetStays(int pageIndex = 0, int pageSize = 10, OrderBy orderBy = OrderBy.Descending)
     {
         IEnumerable<StayViewModel> result = await _mediator.Send(new GetStaysQuery() { 
             PazeIndex = pageIndex,
-            PazeSize = pageSize
+            PazeSize = pageSize,
+            OrderBy = orderBy
         });
         return Ok(result);
     }

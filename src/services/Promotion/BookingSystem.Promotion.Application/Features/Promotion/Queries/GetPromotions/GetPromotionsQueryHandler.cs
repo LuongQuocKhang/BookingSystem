@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using BookingSystem.Promotion.Application.Abstractions;
 using BookingSystem.Promotion.Application.ViewModel;
 using BookingSystem.Promotion.Domain.Entities;
-using BookingSystem.Promotion.Infrastructure.Abstractions;
 using MediatR;
 
 namespace BookingSystem.Promotion.Application.Features.Promotion.Queries.GetPromotions;
@@ -15,8 +15,10 @@ public class GetPromotionsQueryHandler(IPromotionRepository promotionRepository,
 
     public async Task<IReadOnlyCollection<PromotionViewModel>> Handle(GetPromotionsQuery request, CancellationToken cancellationToken)
     {
-        IReadOnlyCollection<PromotionEntity> promotions = await _promotionRepository.GetPromotions(cancellationToken)
-            .ConfigureAwait(false);
+        IReadOnlyCollection<PromotionEntity> promotions = await _promotionRepository.GetPromotions(request.PazeIndex, 
+            request.PazeIndex, 
+            request.OrderBy, 
+            cancellationToken).ConfigureAwait(false);
 
         IReadOnlyCollection<PromotionViewModel> promotionViews = _mapper.Map<IReadOnlyCollection<PromotionViewModel>>(promotions);
 

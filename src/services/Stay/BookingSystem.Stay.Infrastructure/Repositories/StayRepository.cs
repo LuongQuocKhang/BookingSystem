@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BookingSystem.Stay.Application.Constant;
 using BookingSystem.Stay.Application.Contracts.Persistance;
 using BookingSystem.Stay.Application.Exceptions;
 using BookingSystem.Stay.Domain.Entities;
@@ -26,11 +27,24 @@ public class StayRepository(IStayDbContext context,
 
     private readonly IPromotionGrpcService _promotionGrpcService = promotionGrpcService;
 
+    /// <summary>
+    /// Asynchronously add stay to trip list
+    /// </summary>
+    /// <param name="stayId">Id of Stay</param>
+    /// <param name="tripId">Id of Trip</param>
+    /// <param name="cancellationToken">Optional cancellation token</param>
+    /// <returns>A task that represents the send operation. The task result if can add or not</returns>
     public Task<bool> AddStayToTrip(int stayId, int tripId, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
 
+    /// <summary>
+    /// Asynchronously create new stay
+    /// </summary>
+    /// <param name="model">new stay fields</param>
+    /// <param name="cancellationToken">Optional cancellation token</param>
+    /// <returns>A task that represents the send operation. The task result contains id of new stay</returns>
     public async Task<int> CreateStay(StayEntity model, CancellationToken cancellationToken = default)
     {
         try
@@ -49,6 +63,12 @@ public class StayRepository(IStayDbContext context,
         }
     }
 
+    /// <summary>
+    /// Asynchronously delete stay
+    /// </summary>
+    /// <param name="id">id of delete stay</param>
+    /// <param name="cancellationToken">Optional cancellation token</param>
+    /// <returns>A task that represents the send operation. The task result if can delete or not</returns>
     public async Task<bool> DeleteStay(int id, CancellationToken cancellationToken = default)
     {
         try
@@ -73,9 +93,20 @@ public class StayRepository(IStayDbContext context,
         }
     }
 
-    public async Task<IReadOnlyCollection<StayEntity>> GetStays(CancellationToken cancellationToken = default)
+    /// <summary>
+    /// Asynchronously get list of active Stays
+    /// </summary>
+    /// <param name="pageIndex">Current page index</param>
+    /// <param name="pageSize">Number of return value</param>
+    /// <param name="orderBy">Order list result by Descending/Ascending</param>
+    /// <param name="cancellationToken">Optional cancellation token</param>
+    /// <returns>A task that represents the send operation. The task result contains list of stays</returns>
+    public async Task<IReadOnlyCollection<StayEntity>> GetStays(int pageIndex = 0, 
+        int pageSize = 10, 
+        OrderBy orderBy = OrderBy.Descending, 
+        CancellationToken cancellationToken = default)
     {
-        List<StayEntity> dbStays = await _context.Stays
+        IQueryable<StayEntity> dbStays = _context.Stays
             .AsNoTracking()
             .Include(x => x.RoomRates)
             .Include(x => x.StayAmenities!)
@@ -98,20 +129,43 @@ public class StayRepository(IStayDbContext context,
                 RoomRates = x.RoomRates,
                 StayImages = x.StayImages,
                 StayTags = x.StayTags
-            })
-            .ToListAsync(cancellationToken: cancellationToken)
-            .ConfigureAwait(false);
+            });
 
-        foreach (StayEntity stay in dbStays)
+        switch(orderBy)
+        {
+            case OrderBy.Ascending:
+                {
+                    dbStays = dbStays.OrderBy(x => x.CreatedDate);
+                    break;
+                }
+            case OrderBy.Descending:
+                {
+                    dbStays = dbStays.OrderByDescending(x => x.CreatedDate);
+                    break;
+                }
+        }
+
+        dbStays = dbStays.Skip(pageIndex * pageSize)
+            .Take(pageSize);
+
+        List<StayEntity> filteredStayEntities = await dbStays.ToListAsync(cancellationToken).ConfigureAwait(false);
+
+        foreach (StayEntity stay in filteredStayEntities)
         {
             await GetPromotionForStay(stay, cancellationToken).ConfigureAwait(false);
         }
 
-        var stayViews = new ReadOnlyCollection<StayEntity>(dbStays);
+        var stayViews = new ReadOnlyCollection<StayEntity>(filteredStayEntities);
 
         return stayViews;
     }
 
+    /// <summary>
+    /// Asynchronously get stay by Id
+    /// </summary>
+    /// <param name="id">id of stay</param>
+    /// <param name="cancellationToken">Optional cancellation token</param>
+    /// <returns>A task that represents the send operation. The task result contains stay information </returns>
     public async Task<StayEntity?> GetStayById(int id, CancellationToken cancellationToken = default)
     {
         StayEntity? stay = _context.Stays
@@ -133,6 +187,12 @@ public class StayRepository(IStayDbContext context,
         return await Task.FromResult(stay).ConfigureAwait(false);
     }
 
+    /// <summary>
+    /// Asynchronously review stay
+    /// </summary>
+    /// <param name="model">contains rating, comment, id of stay </param>
+    /// <param name="cancellationToken">Optional cancellation token</param>
+    /// <returns>A task that represents the send operation. The task result if can review or not</returns>
     public async Task<bool> ReviewStay(StayReviewEntity model, CancellationToken cancellationToken = default)
     {
         EntityEntry<StayReviewEntity>? review = await _context.StayReviews.AddAsync(model, cancellationToken)
@@ -143,6 +203,12 @@ public class StayRepository(IStayDbContext context,
         return review != null;
     }
 
+    /// <summary>
+    /// Asynchronously add stay to wish list
+    /// </summary>
+    /// <param name="model">contains rating, comment, id of stay </param>
+    /// <param name="cancellationToken">Optional cancellation token</param>
+    /// <returns>A task that represents the send operation. The task result if can review or not</returns>
     public async Task<bool> SaveStayToWishList(StayWishListEntity wishList, CancellationToken cancellationToken = default)
     {
         EntityEntry<StayWishListEntity>? stay = await _context.StayWishLists.AddAsync(wishList, cancellationToken)
@@ -263,7 +329,7 @@ public class StayRepository(IStayDbContext context,
         }
     }
 
-    private async Task GetPromotionForStay(StayEntity stay, CancellationToken cancellationToken)
+    private async Task GetPromotionForStay(StayEntity stay, CancellationToken cancellationToken = default)
     {
         var promotions = await _promotionGrpcService.GetPromotions(stay.Id).ConfigureAwait(false);
 
