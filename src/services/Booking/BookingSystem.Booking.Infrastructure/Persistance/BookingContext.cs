@@ -1,34 +1,16 @@
-﻿using BookingSystem.Stay.Domain.Common;
-using BookingSystem.Stay.Domain.Entities;
-using BookingSystem.Stay.Infrastructure.Abstractions;
+﻿using BookingSystem.Booking.Domain.Common;
+using BookingSystem.Booking.Domain.Entities;
+using BookingSystem.Booking.Infrastructure.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace BookingSystem.Stay.Infrastructure.Persistance;
+namespace BookingSystem.Booking.Infrastructure.Persistance;
 
-public class StayContext(DbContextOptions<StayContext> options) : DbContext(options), IStayDbContext
+public class BookingContext(DbContextOptions<BookingContext> options) : DbContext(options), IBookingContext
 {
     private IDbContextTransaction _transaction;
 
-    public DbSet<StayEntity> Stays { get; set; }
-
-    public DbSet<RoomRateEntity> RoomRates { get; set; }
-
-    public DbSet<StayReviewEntity> StayReviews { get; set; }
-
-    public DbSet<StayWishListEntity> StayWishLists { get; set; }
-
-    public DbSet<StayShareEntity> StayShares { get; set; }
-
-    public DbSet<StayImageEntity> StayImages { get; set; }
-
-    public DbSet<StayAmenityEntity> StayAmenities { get; set; }
-
-    public DbSet<AmenityEntity> Amenities { get; set; }
-
-    public DbSet<StayUnAvailabilityEntity> StayUnAvailability { get; set; }
-
-    public DbSet<StayTagEntity> StayTags { get; set; }
+    public DbSet<BookingEntity> Bookings { get; set; }
 
     public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
@@ -55,7 +37,6 @@ public class StayContext(DbContextOptions<StayContext> options) : DbContext(opti
 
         return base.SaveChangesAsync(cancellationToken);
     }
-
     public void BeginTransaction()
     {
         _transaction = Database.BeginTransaction();

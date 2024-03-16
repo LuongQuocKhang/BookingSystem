@@ -27,6 +27,7 @@ public static class InfrastructureServiceRegistration
         services.AddTransient<IStayDbContext, StayContext>();
 
         services.AddTransient<IStayRepository, StayRepository>();
+
         services.AddTransient<IAmenityRepository, AmenityRepository>();
 
         return services;

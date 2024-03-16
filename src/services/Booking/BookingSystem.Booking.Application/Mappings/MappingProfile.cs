@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BookingSystem.Booking.Application.Features.Booking.Commands;
+using BookingSystem.Booking.Domain.Entities;
 
 namespace BookingSystem.Booking.Application.Mappings;
 
@@ -11,6 +8,6 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-
+        CreateMap<BookingEntity, BookingStayCommand>().ReverseMap();
     }
 }

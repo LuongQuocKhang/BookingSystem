@@ -219,6 +219,13 @@ public class StayRepository(IStayDbContext context,
         return stay != null;
     }
 
+    /// <summary>
+    /// Asynchronously share stay to other people
+    /// </summary>
+    /// <param name="stayId">id of shared stay </param>
+    /// <param name="userIds">id of received users </param>
+    /// <param name="cancellationToken">Optional cancellation token</param>
+    /// <returns>A task that represents the send operation. The task result if can share or not</returns>
     public async Task<bool> ShareStay(int stayId, IEnumerable<int> userIds, CancellationToken cancellationToken = default)
     {
         foreach (int userId in userIds)
@@ -236,6 +243,12 @@ public class StayRepository(IStayDbContext context,
         return true;
     }
 
+    /// <summary>
+    /// Asynchronously update stay information
+    /// </summary>
+    /// <param name="model">stay information </param>
+    /// <param name="cancellationToken">Optional cancellation token</param>
+    /// <returns>A task that represents the send operation. The task result if can update or not</returns>
     public async Task<bool> UpdateStay(StayEntity model, CancellationToken cancellationToken = default)
     {
         _context.BeginTransaction();
@@ -329,6 +342,12 @@ public class StayRepository(IStayDbContext context,
         }
     }
 
+    /// <summary>
+    /// Asynchronously get promotion of stay
+    /// </summary>
+    /// <param name="stay">stay information </param>
+    /// <param name="cancellationToken">Optional cancellation token</param>
+    /// <returns>A task that represents the send operation. The task result if can update or not</returns>
     private async Task GetPromotionForStay(StayEntity stay, CancellationToken cancellationToken = default)
     {
         var promotions = await _promotionGrpcService.GetPromotions(stay.Id).ConfigureAwait(false);

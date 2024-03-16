@@ -6,6 +6,7 @@ namespace BookingSystem.Stay.Application.ViewModel;
 public class StayViewModel
 {
     public int Id { get; set; }
+
     public string? Name { get; set; }
 
     public int NumberOfBeds { get; set; }

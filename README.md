@@ -4,16 +4,17 @@ Whats Including In This Repository
  # Booking System Api
   - Identity Server (https://localhost:8000)
   - API Gateways (https://localhost:8020)
-  - Stay Management API (https://localhost:8001/swagger/index.html)
-  - Promotion Management API (https://localhost:8002/swagger/index.html)
-  - Promotion Management gRPC (https://localhost:8003)
-  - Cars Manegenent API (https://localhost:8004)
-  - Flight Management API (https://localhost:8005/swagger/index.html)
-  - Booking Management API (https://localhost:8006/swagger/index.html)
-  - Experiences Management API (https://localhost:8007/swagger/index.html)
-  - Payment Management API (https://localhost:8008/swagger/index.html)
-  - Payment Processor (https://localhost:8009)
-  - Trips Management API (https://localhost:8010/swagger/index.html)
+  - Stay Management API (https://localhost:8010/swagger/index.html)
+  - Stay Management gRPC (https://localhost:8011)
+  - Promotion Management API (https://localhost:8020/swagger/index.html)
+  - Promotion Management gRPC (https://localhost:8021)
+  - Cars Manegenent API (https://localhost:8040)
+  - Flight Management API (https://localhost:8050/swagger/index.html)
+  - Booking Management API (https://localhost:8060/swagger/index.html)
+  - Experiences Management API (https://localhost:8070/swagger/index.html)
+  - Payment Management API (https://localhost:8090/swagger/index.html)
+  - Payment Processor (https://localhost:8091)
+  - Trips Management API (https://localhost:8110/swagger/index.html)
 
 # Identity Server 6
  - "Duende.IdentityServer.AspNetIdentity" Package Version="6.3.2"
