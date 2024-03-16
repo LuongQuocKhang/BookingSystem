@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option csharp_namespace = "BookingSystem.Stay.gRPC";
+
+service StayService {
+  // Get Protions of Stay
+  rpc GetStayById (GetStayQuery) returns (GetStayResponse);
+}
+
+message GetStayQuery {
+	int32 stayId = 1;
+}
+
+message GetStayResponse {
+	int32 stayId = 1;
+	string Name = 2;
+	int32 NumberOfBeds = 3;
+	int32 NumberOfGuests = 4;
+	int32 NumberOfBathrooms = 5;
+	int32 NumberOfBedrooms = 6;
+	string Address = 7;
+	double Rating = 8;
+	double PricePerNight = 9;
+}

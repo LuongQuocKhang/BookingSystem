@@ -24,7 +24,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7210;http://localhost:5222",
+      "applicationUrl": "https://localhost:8030;http://localhost:5222",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

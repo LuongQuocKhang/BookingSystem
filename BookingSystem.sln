@@ -139,19 +139,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Promotion.Inf
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Booking", "Booking", "{3EC97BD4-5A02-42D2-AADF-1860BCD1E3A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Booking.Api.Test", "src\tests\Booking\BookingSystem.Booking.Api.Test\BookingSystem.Booking.Api.Test.csproj", "{8695A4CA-F8A6-4870-AD69-1604FE9B6925}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Booking.Api.Test", "src\tests\Booking\BookingSystem.Booking.Api.Test\BookingSystem.Booking.Api.Test.csproj", "{8695A4CA-F8A6-4870-AD69-1604FE9B6925}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Booking.Application.Test", "src\tests\Booking\BookingSystem.Booking.Application.Test\BookingSystem.Booking.Application.Test.csproj", "{CE61514F-952E-492E-B655-4F58EF091923}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Booking.Application.Test", "src\tests\Booking\BookingSystem.Booking.Application.Test\BookingSystem.Booking.Application.Test.csproj", "{CE61514F-952E-492E-B655-4F58EF091923}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Booking.Infrastructure.Test", "src\tests\Booking\BookingSystem.Booking.Infrastructure.Test\BookingSystem.Booking.Infrastructure.Test.csproj", "{9EDDFC19-9D4E-4430-B0A7-76F374F10B98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Booking.Infrastructure.Test", "src\tests\Booking\BookingSystem.Booking.Infrastructure.Test\BookingSystem.Booking.Infrastructure.Test.csproj", "{9EDDFC19-9D4E-4430-B0A7-76F374F10B98}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cars", "Cars", "{17FE815F-4C7A-4EEC-AC7F-E99E4B0A93C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Cars.Api.Test", "src\tests\Cars\BookingSystem.Cars.Api.Test\BookingSystem.Cars.Api.Test.csproj", "{BD6108ED-F426-40CB-9C6C-6026C4242DB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Cars.Api.Test", "src\tests\Cars\BookingSystem.Cars.Api.Test\BookingSystem.Cars.Api.Test.csproj", "{BD6108ED-F426-40CB-9C6C-6026C4242DB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Cars.Application.Test", "src\tests\Cars\BookingSystem.Cars.Application.Test\BookingSystem.Cars.Application.Test.csproj", "{4E94A965-A91E-43C9-9D6A-80F7D79F3B8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Cars.Application.Test", "src\tests\Cars\BookingSystem.Cars.Application.Test\BookingSystem.Cars.Application.Test.csproj", "{4E94A965-A91E-43C9-9D6A-80F7D79F3B8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Cars.Infrastructure.Test", "src\tests\Cars\BookingSystem.Cars.Infrastructure.Test\BookingSystem.Cars.Infrastructure.Test.csproj", "{06B55740-8BF6-4A5C-A56D-C27C6F83AC8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Cars.Infrastructure.Test", "src\tests\Cars\BookingSystem.Cars.Infrastructure.Test\BookingSystem.Cars.Infrastructure.Test.csproj", "{06B55740-8BF6-4A5C-A56D-C27C6F83AC8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Stay.gRPC", "src\services\Stay\BookingSystem.Stay.gRPC\BookingSystem.Stay.gRPC.csproj", "{6C965F2E-278A-4E9B-BB3A-0076E829F963}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -383,6 +385,10 @@ Global
 		{06B55740-8BF6-4A5C-A56D-C27C6F83AC8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06B55740-8BF6-4A5C-A56D-C27C6F83AC8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06B55740-8BF6-4A5C-A56D-C27C6F83AC8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C965F2E-278A-4E9B-BB3A-0076E829F963}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C965F2E-278A-4E9B-BB3A-0076E829F963}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C965F2E-278A-4E9B-BB3A-0076E829F963}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C965F2E-278A-4E9B-BB3A-0076E829F963}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -461,6 +467,7 @@ Global
 		{BD6108ED-F426-40CB-9C6C-6026C4242DB9} = {17FE815F-4C7A-4EEC-AC7F-E99E4B0A93C5}
 		{4E94A965-A91E-43C9-9D6A-80F7D79F3B8B} = {17FE815F-4C7A-4EEC-AC7F-E99E4B0A93C5}
 		{06B55740-8BF6-4A5C-A56D-C27C6F83AC8B} = {17FE815F-4C7A-4EEC-AC7F-E99E4B0A93C5}
+		{6C965F2E-278A-4E9B-BB3A-0076E829F963} = {143CBC2E-6ABC-4572-B403-2EE52009956F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D8E9EDDD-59D5-429B-BE54-39D1F073F4B1}
