@@ -1,9 +1,10 @@
 ﻿using BookingSystem.Booking.Domain.Common;
+using BookingSystem.Booking.Domain.Constant;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookingSystem.Booking.Domain.Entities
 {
-    [Table("BookingSystem", Schema = "Booking")]
+    [Table("Booking", Schema = "BookingSystem")]
     public class BookingEntity : EntityBase
     {
         public int StayId { get; set; }
@@ -21,5 +22,7 @@ namespace BookingSystem.Booking.Domain.Entities
         public int NumberOfInfants { get; set; }
 
         public string? MessagerForAuthor { get; set; } = string.Empty;
+
+        public BookingStatus StatusId { get; set; }
     }
 }

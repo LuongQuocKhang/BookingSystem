@@ -11,4 +11,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BookingSystem.Notification.Application\BookingSystem.Notification.Application.csproj" />
+    <ProjectReference Include="..\BookingSystem.Notification.Infrastructure\BookingSystem.Notification.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -63,6 +63,9 @@ namespace BookingSystem.Booking.Infrastructure.Migrations
                     b.Property<int>("NumberOfInfants")
                         .HasColumnType("int");
 
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
                     b.Property<int>("StayId")
                         .HasColumnType("int");
 
@@ -71,7 +74,7 @@ namespace BookingSystem.Booking.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BookingSystem", "Booking");
+                    b.ToTable("Booking", "BookingSystem");
                 });
 #pragma warning restore 612, 618
         }

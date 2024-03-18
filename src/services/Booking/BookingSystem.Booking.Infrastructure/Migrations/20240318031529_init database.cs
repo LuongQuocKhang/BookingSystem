@@ -12,11 +12,11 @@ namespace BookingSystem.Booking.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "Booking");
+                name: "BookingSystem");
 
             migrationBuilder.CreateTable(
-                name: "BookingSystem",
-                schema: "Booking",
+                name: "Booking",
+                schema: "BookingSystem",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -29,6 +29,7 @@ namespace BookingSystem.Booking.Infrastructure.Migrations
                     NumberOfChildren = table.Column<int>(type: "int", nullable: false),
                     NumberOfInfants = table.Column<int>(type: "int", nullable: false),
                     MessagerForAuthor = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StatusId = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedBy = table.Column<int>(type: "int", nullable: false),
@@ -37,7 +38,7 @@ namespace BookingSystem.Booking.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookingSystem", x => x.Id);
+                    table.PrimaryKey("PK_Booking", x => x.Id);
                 });
         }
 
@@ -45,8 +46,8 @@ namespace BookingSystem.Booking.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BookingSystem",
-                schema: "Booking");
+                name: "Booking",
+                schema: "BookingSystem");
         }
     }
 }

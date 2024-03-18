@@ -16,7 +16,7 @@ public class GetPromotionsQueryHandler(IPromotionRepository promotionRepository,
     public async Task<IReadOnlyCollection<PromotionViewModel>> Handle(GetPromotionsQuery request, CancellationToken cancellationToken)
     {
         IReadOnlyCollection<PromotionEntity> promotions = await _promotionRepository.GetPromotions(request.PazeIndex, 
-            request.PazeIndex, 
+            request.PazeSize, 
             request.OrderBy, 
             cancellationToken).ConfigureAwait(false);
 

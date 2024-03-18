@@ -24,7 +24,7 @@ public class BookingStayCommand : IRequest<int>
     #endregion
 
     #region Payment
-    public PaymentMethod PaymentMethod { get; set; }
+    public Constant PaymentMethod { get; set; }
 
     public string CardNumber { get; set; } = string.Empty;
 

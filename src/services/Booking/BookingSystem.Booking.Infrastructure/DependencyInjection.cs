@@ -1,8 +1,10 @@
 ﻿using BookingSystem.Booking.Infrastructure.Abstractions;
+using BookingSystem.Booking.Infrastructure.Configurations;
 using BookingSystem.Booking.Infrastructure.GrpcServices;
 using BookingSystem.Booking.Infrastructure.Persistance;
 using BookingSystem.Booking.Infrastructure.Repositories;
 using BookingSystem.Stay.gRPC;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,7 +29,33 @@ public static class DependencyInjection
 
         services.AddTransient<IBookingContext, BookingContext>();
 
+        services.AddRabbitMQ(configuration);
+
         return services;
     }
 
+    public static IServiceCollection AddRabbitMQ(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddMassTransit(x =>
+        {
+            MessageBrokerOptions? options = configuration.GetSection(MessageBrokerOptions.BindLocator).Get<MessageBrokerOptions>() 
+                ?? throw new InvalidOperationException("Rabbitmq configuration not found.");
+
+            if (string.IsNullOrEmpty(options?.Notification?.Host))
+            {
+                throw new InvalidOperationException("Rabbitmq ConnectionString must not empty.");
+            }
+
+            x.UsingRabbitMq((ctx, cfg) =>
+            {
+                cfg.Host(options.Notification.Host, options.Notification.VirtualHost, config =>
+                {
+                    config.Username(options.Notification.User);
+                    config.Password(options.Notification.Password);
+                });
+            });
+        });
+
+        return services;
+    }
 }

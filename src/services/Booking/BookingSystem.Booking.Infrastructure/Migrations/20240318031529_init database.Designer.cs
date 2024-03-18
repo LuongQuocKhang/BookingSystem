@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Booking.Infrastructure.Migrations
 {
     [DbContext(typeof(BookingContext))]
-    [Migration("20240316122722_init database")]
+    [Migration("20240318031529_init database")]
     partial class initdatabase
     {
         /// <inheritdoc />
@@ -66,6 +66,9 @@ namespace BookingSystem.Booking.Infrastructure.Migrations
                     b.Property<int>("NumberOfInfants")
                         .HasColumnType("int");
 
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
                     b.Property<int>("StayId")
                         .HasColumnType("int");
 
@@ -74,7 +77,7 @@ namespace BookingSystem.Booking.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BookingSystem", "Booking");
+                    b.ToTable("Booking", "BookingSystem");
                 });
 #pragma warning restore 612, 618
         }

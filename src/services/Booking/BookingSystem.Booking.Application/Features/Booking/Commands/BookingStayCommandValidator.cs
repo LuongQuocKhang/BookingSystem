@@ -40,7 +40,7 @@ public class BookingStayCommandValidator : AbstractValidator<BookingStayCommand>
             .Cascade(CascadeMode.Stop)
             .Must((model, paymentMethod) =>
             {
-                if (paymentMethod == PaymentMethod.CreditCard)
+                if (paymentMethod == Constant.CREDITCARD)
                 {
                     if (string.IsNullOrEmpty(model.CardNumber)
                         || string.IsNullOrEmpty(model.CardHolder)

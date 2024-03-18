@@ -17,11 +17,19 @@ namespace BookingSystem.Stay.gRPC.Services
         {
             StayEntity? stay = await _stayRepository.GetStayById(request.StayId).ConfigureAwait(false);
 
-            GetStayResponse getStayResponse = new GetStayResponse();
+            GetStayResponse getStayResponse = new();
 
             if (stay != null)
             {
-                getStayResponse = _mapper.Map<GetStayResponse>(stay);
+                getStayResponse.StayId = stay.Id;
+                getStayResponse.Address = stay.Address;
+                getStayResponse.NumberOfBathrooms = stay.NumberOfBathrooms;
+                getStayResponse.NumberOfBeds = stay.NumberOfBeds;
+                getStayResponse.NumberOfBedrooms = stay.NumberOfBedrooms;
+                getStayResponse.NumberOfGuests = stay.NumberOfGuests;
+                getStayResponse.Name = stay.Name;
+                getStayResponse.PricePerNight = stay.PricePerNight;
+                getStayResponse.Rating = stay.Rating;
             }
 
             return getStayResponse;
