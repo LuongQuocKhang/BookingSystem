@@ -1,5 +1,4 @@
 ﻿using BookingSystem.Notification.Infrastructure.Comsumers;
-using BookingSystem.Notification.Infrastructure.Messages;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

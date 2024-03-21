@@ -29,12 +29,12 @@ public static class DependencyInjection
 
         services.AddTransient<IBookingContext, BookingContext>();
 
-        services.AddRabbitMQ(configuration);
+        services.AddPublishers(configuration);
 
         return services;
     }
 
-    public static IServiceCollection AddRabbitMQ(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddPublishers(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddMassTransit(x =>
         {
@@ -53,6 +53,8 @@ public static class DependencyInjection
                     config.Username(options.Notification.User);
                     config.Password(options.Notification.Password);
                 });
+
+                cfg.ConfigureEndpoints(ctx);
             });
         });
 

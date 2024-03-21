@@ -153,7 +153,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Cars.Applicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Cars.Infrastructure.Test", "src\tests\Cars\BookingSystem.Cars.Infrastructure.Test\BookingSystem.Cars.Infrastructure.Test.csproj", "{06B55740-8BF6-4A5C-A56D-C27C6F83AC8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Stay.gRPC", "src\services\Stay\BookingSystem.Stay.gRPC\BookingSystem.Stay.gRPC.csproj", "{6C965F2E-278A-4E9B-BB3A-0076E829F963}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingSystem.Stay.gRPC", "src\services\Stay\BookingSystem.Stay.gRPC\BookingSystem.Stay.gRPC.csproj", "{6C965F2E-278A-4E9B-BB3A-0076E829F963}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Masstransit", "Masstransit", "{E3B5F164-3D58-4CB1-B205-DEEA22F90770}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Messages", "Messages\BookingSystem.Messages.csproj", "{5A7C69BC-C3C8-42AA-BBBC-1776E5466AC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -389,6 +393,10 @@ Global
 		{6C965F2E-278A-4E9B-BB3A-0076E829F963}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C965F2E-278A-4E9B-BB3A-0076E829F963}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C965F2E-278A-4E9B-BB3A-0076E829F963}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A7C69BC-C3C8-42AA-BBBC-1776E5466AC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A7C69BC-C3C8-42AA-BBBC-1776E5466AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A7C69BC-C3C8-42AA-BBBC-1776E5466AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A7C69BC-C3C8-42AA-BBBC-1776E5466AC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -468,6 +476,8 @@ Global
 		{4E94A965-A91E-43C9-9D6A-80F7D79F3B8B} = {17FE815F-4C7A-4EEC-AC7F-E99E4B0A93C5}
 		{06B55740-8BF6-4A5C-A56D-C27C6F83AC8B} = {17FE815F-4C7A-4EEC-AC7F-E99E4B0A93C5}
 		{6C965F2E-278A-4E9B-BB3A-0076E829F963} = {143CBC2E-6ABC-4572-B403-2EE52009956F}
+		{E3B5F164-3D58-4CB1-B205-DEEA22F90770} = {C68B9599-7490-4E00-8C1F-B957AF896C5B}
+		{5A7C69BC-C3C8-42AA-BBBC-1776E5466AC2} = {E3B5F164-3D58-4CB1-B205-DEEA22F90770}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D8E9EDDD-59D5-429B-BE54-39D1F073F4B1}

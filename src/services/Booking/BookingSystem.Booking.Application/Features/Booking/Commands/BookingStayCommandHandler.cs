@@ -16,11 +16,11 @@ public class BookingStayCommandHandler(IStayGrpcService stayGrpcService, IMapper
 
     public async Task<int> Handle(BookingStayCommand request, CancellationToken cancellationToken)
     {
-        _ = await _stayGrpcService.GetStayById(request.StayId).ConfigureAwait(false) ?? throw new NotFoundException("Stay Not Found.");
+        //_ = await _stayGrpcService.GetStayById(request.StayId).ConfigureAwait(false) ?? throw new NotFoundException("Stay Not Found.");
 
         BookingEntity dto = _mapper.Map<BookingEntity>(request);
 
-        int result = await _bookingRepository.BookStay(dto).ConfigureAwait(false);
+        int result = await _bookingRepository.BookStay(dto, cancellationToken).ConfigureAwait(false);
 
         return result;
     }

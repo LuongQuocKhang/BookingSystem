@@ -1,6 +1,6 @@
-﻿namespace BookingSystem.Notification.Infrastructure.Messages;
+﻿namespace BookingSystem.Messages.Booking;
 
-public class BookingAddedMessage
+public interface IBookingAddedMessage
 {
     public int StayId { get; set; }
 

@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Messages\BookingSystem.Messages.csproj" />
     <ProjectReference Include="..\BookingSystem.Booking.Domain\BookingSystem.Booking.Domain.csproj" />
   </ItemGroup>
 

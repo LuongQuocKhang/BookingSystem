@@ -1,6 +1,7 @@
 ﻿using BookingSystem.Booking.Domain.Entities;
 using BookingSystem.Booking.Infrastructure.Abstractions;
 using BookingSystem.Booking.Infrastructure.Messages;
+using BookingSystem.Messages.Booking;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
@@ -31,11 +32,11 @@ public class BookingRepository : IBookingRepository
 
             int result = await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
-            await _publishEndpoint.Publish<BookingAddedMessage>(new BookingAddedMessage()
-                {
-                    StayId = model.StayId,
-                    UserId = model.UserId,
-                    BookingId = model.Id
+            await _publishEndpoint.Publish<IBookingAddedMessage>(new BookingAddedMessage()
+            {
+                StayId = model.StayId,
+                UserId = model.UserId,
+                BookingId = model.Id
             }, cancellationToken).ConfigureAwait(false);
 
             return model.Id;
